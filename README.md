@@ -31,25 +31,26 @@ Time permitting, the app will also include a feature for varying caloric goals (
 
 ### Domains:
 
-1. User 
+*1. User *
 - has food recommendations for each category (starch, fruit, milk, vegetable, meat, fat)
 - has target calorie goal
 - has favorites of foods (can be null)
 - has many DayLogs
 
-2. DayLog 
+*2. DayLog *
 - has category values allowed for the day
 - helper functions for how many remaining of each category remainings
 - has max 1 each of breakfast, lunch, dinner, snack
 - has date
 
-3. Breakfast - has daylog, has user, hasMany foods (foods can be null for all meal types)
-4. Lunch - - has daylog, has user, hasMany foods
-5. Dinner - - has daylog, has user, hasMany foods
-6. Snack - has daylog, has user, hasMany foods
+*3. Breakfast* - has daylog, has user, hasMany foods (foods can be null for all meal types)
+*4. Lunch* - - has daylog, has user, hasMany foods
+*5. Dinner* - - has daylog, has user, hasMany foods
+*6. Snack* - has daylog, has user, hasMany foods
+
 (Considered making these one Meal domain with different types, but decided it be easier for retrieval and categorizing purposes if they were all different domains)
 
-7. Food
+*7. Food*
 - has category type: starch, fruit, milk, vegetable, meat, fat
 - has contants for food type value in calories and grams
 - belongs to Breakfast/Lunch/Dinner/Snack
