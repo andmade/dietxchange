@@ -14,6 +14,15 @@ class User implements Serializable {
 
 	SpringSecurityService springSecurityService
 
+
+	Integer starchCount
+	Integer fruitCount
+	Integer milkCount
+	Integer veggieCount
+	Integer proteinCount
+	Integer fatCount
+	Integer targetCalories
+
 	String username
 	String password
 	boolean enabled = true
@@ -39,14 +48,23 @@ class User implements Serializable {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
 
-	static transients = ['springSecurityService']
+	static transients = ['springSecurityService', 'favoriteFoods', 'dayLogs']
 
 	static constraints = {
 		password blank: false, password: true
 		username blank: false, unique: true
+		starchCount(min:1)
+		fruitCount(min:1)
+		milkCount(min:1)
+		veggieCount(min:1)
+		proteinCount(min:1)
+		fatCount(min:1)
+		targetCalories(min:1200)
 	}
 
 	static mapping = {
 		password column: '`password`'
 	}
+
+
 }
