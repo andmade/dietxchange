@@ -44,24 +44,25 @@ Time permitting, the app will also include a feature for varying caloric goals (
 - has date
 - has a user
 
-**3. Breakfast** - has daylog, has user, hasMany foods (foods can be null for all meal types)
+**3. Meal**
+- has type (breakfast, lunch, dinner, snack)
+- has daylog
+- has user
+- hasMany Foods
 
-**4. Lunch** - - has daylog, has user, hasMany foods
-
-**5. Dinner** - - has daylog, has user, hasMany foods
-
-**6. Snack** - has daylog, has user, hasMany foods
-
->(Considered making these one Meal domain with different types, but decided it be easier for retrieval and categorizing purposes if they were all different domains)
-
-**7. Food**
+**4. Food**
 - has category type: starch, fruit, milk, vegetable, protein, fat
-- has contants for food type value in calories and grams
 - belongs to Breakfast/Lunch/Dinner/Snack
 - has favorite flag
 - has portion size
+- has portion unit
 
-### Food database
+>Will probably reformat this so that there's a Food for each item in the database,
+and Food would have many Meals associated with it (since the database of foods.
+will be limited). So a hasMany<=>hasMany relationship. More research on how to implement
+in Grails required. If this happens, favorite management will be moved to the User class.
+
+### Food database (will be used to create the Food classes)
 Each item has 
 - item name
 - has food type(s)

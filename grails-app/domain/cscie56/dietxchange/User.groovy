@@ -23,6 +23,7 @@ class User implements Serializable {
 	Integer fatCount
 	Integer targetCalories
 
+
 	String username
 	String password
 	boolean enabled = true
@@ -48,7 +49,8 @@ class User implements Serializable {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
 
-	static transients = ['springSecurityService', 'favoriteFoods', 'dayLogs']
+	static transients = ['springSecurityService', 'dayLogs', 'favoriteFoods',
+						 'breakfastFaves','lunchFaves','dinnerFaves','snackFaves']
 
 	static constraints = {
 		password blank: false, password: true
@@ -64,6 +66,27 @@ class User implements Serializable {
 
 	static mapping = {
 		password column: '`password`'
+	}
+
+	List<DayLog> getDayLogs() {
+		return DayLog.findAllByUser(this)
+	}
+
+	List<Food> getFavoriteFoods() {
+		return Food.findAllByUserAndFavorite(this,true)
+	}
+
+	List<Food> getBreakfastFaves() {
+		Food.findAllByUserAndFavorite(this,true).findAll{it.meal.type == 'breakfast'}
+	}
+	List<Food> getLunchFaves() {
+		Food.findAllByUserAndFavorite(this,true).findAll{it.meal.type == 'lunch'}
+	}
+	List<Food> getDinnerFaves() {
+		Food.findAllByUserAndFavorite(this,true).findAll{it.meal.type == 'dinner'}
+	}
+	List<Food> getSnackFaves() {
+		Food.findAllByUserAndFavorite(this,true).findAll{it.meal.type == 'snack'}
 	}
 
 
