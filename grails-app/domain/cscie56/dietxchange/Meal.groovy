@@ -2,18 +2,15 @@ package cscie56.dietxchange
 
 class Meal {
 
+    static hasMany = [foods:Food]
     String type
     DayLog daylog
-    User user
+    Dieter dieter
 
-    static transients = ['foods']
 
     static constraints = {
         type(inList: ['breakfast','lunch','dinner','snack'])
 
     }
 
-    List<Food> getFoods() {
-        return Food.findAllByMeal(this)
-    }
 }

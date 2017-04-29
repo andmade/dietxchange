@@ -6,7 +6,7 @@ class DayLog {
     Meal lunch = null
     Meal dinner = null
     Meal snack = null
-    User user
+    Dieter dieter
 
     Integer starchCount
     Integer fruitCount
@@ -27,8 +27,8 @@ class DayLog {
         dinner(validator: { val ->
             val.type == 'dinner'
         })
-        dinner(validator: { val ->
-            val.type == 'dinner'
+        snack(validator: { val ->
+            val.type == 'snack'
         })
         starchCount(min:1)
         fruitCount(min:1)
@@ -39,50 +39,50 @@ class DayLog {
     }
 
     Integer getStarchRemainder() {
-        if((this.starchCount - user.starchCount) < 0) {
+        if((this.starchCount - dieter.starchCount) < 0) {
             return 0
         } else{
-            return this.starchCount - user.starchCount
+            return this.starchCount - dieter.starchCount
         }
     }
 
     Integer getMilkRemainder() {
-        if((this.milkCount - user.milkCount) < 0) {
+        if((this.milkCount - dieter.milkCount) < 0) {
             return 0
         } else{
-            return this.milkCount - user.milkCount
+            return this.milkCount - dieter.milkCount
         }
     }
 
     Integer getFruitRemainder() {
-        if((this.fruitCount - user.fruitCount) < 0) {
+        if((this.fruitCount - dieter.fruitCount) < 0) {
             return 0
         } else{
-            return this.fruitCount - user.fruitCount
+            return this.fruitCount - dieter.fruitCount
         }
     }
 
     Integer getProteinRemainder() {
-        if((this.proteinCount - user.proteinCount) < 0) {
+        if((this.proteinCount - dieter.proteinCount) < 0) {
             return 0
         } else{
-            return this.proteinCount - user.proteinCount
+            return this.proteinCount - dieter.proteinCount
         }
     }
 
     Integer getVeggieRemainder() {
-        if((this.veggieCount - user.veggieCount) < 0) {
+        if((this.veggieCount - dieter.veggieCount) < 0) {
             return 0
         } else{
-            return this.veggieCount - user.veggieCount
+            return this.veggieCount - dieter.veggieCount
         }
     }
 
     Integer getFatRemainder() {
-        if((this.fatCount - user.fatCount) < 0) {
+        if((this.fatCount - dieter.fatCount) < 0) {
             return 0
         } else{
-            return this.fatCount - user.fatCount
+            return this.fatCount - dieter.fatCount
         }
     }
 }
