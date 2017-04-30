@@ -2,6 +2,7 @@ package cscie56.dietxchange
 
 class Dieter {
 
+    static hasMany = [dayLogs:DayLog]
     Integer starchCount
     Integer fruitCount
     Integer milkCount
@@ -9,7 +10,8 @@ class Dieter {
     Integer proteinCount
     Integer fatCount
     Integer targetCalories
-    List<Food> favoriteFoods = []
+    Map<Food,String> favoriteFoods = [:]
+
 
     static constraints = {
         starchCount(min:1)
@@ -21,23 +23,19 @@ class Dieter {
         targetCalories(min:1200)
     }
 
-    List<DayLog> getDayLogs() {
-        return DayLog.findAllByDieter(this)
+    Map<Food,String> getBreakfastFaves() {
+        favoriteFoods.findAll{it.value == 'breakfast'}
     }
-
-    List<Food> getBreakfastFaves() {
-        favoriteFoods.findAll{it.meal.type == 'breakfast'}
-    }
-    List<Food> getLunchFaves() {
-        favoriteFoods.findAll{it.meal.type == 'lunch'}
+    Map<Food,String> getLunchFaves() {
+        favoriteFoods.findAll{it.value == 'lunch'}
 
     }
-    List<Food> getDinnerFaves() {
-        favoriteFoods.findAll { it.meal.type == 'dinner' }
+    Map<Food,String> getDinnerFaves() {
+        favoriteFoods.findAll { it.value == 'dinner' }
     }
 
-    List<Food> getSnackFaves() {
-        favoriteFoods.findAll{it.meal.type == 'snack'}
+    Map<Food,String> getSnackFaves() {
+        favoriteFoods.findAll{it.value == 'snack'}
 
     }
 }

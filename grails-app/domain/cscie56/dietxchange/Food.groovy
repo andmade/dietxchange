@@ -6,7 +6,6 @@ class Food {
     static hasMany = [meals:Meal]
 
     String category
-    Meal meal
     String name
     BigDecimal portionSize
     String portionUnit
