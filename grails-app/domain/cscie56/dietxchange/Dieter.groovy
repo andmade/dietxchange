@@ -1,8 +1,12 @@
 package cscie56.dietxchange
 
+import springsecurity.dietxchange.User
+
 class Dieter {
 
     static hasMany = [dayLogs:DayLog]
+    static belongsTo = [user:User]
+
     Integer starchCount
     Integer fruitCount
     Integer milkCount

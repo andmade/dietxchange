@@ -1,4 +1,4 @@
-package cscie56.dietxchange
+package springsecurity.dietxchange
 
 import grails.gorm.DetachedCriteria
 import groovy.transform.ToString

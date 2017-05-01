@@ -1,4 +1,4 @@
-package cscie56.dietxchange
+package springsecurity.dietxchange
 
 import grails.plugin.springsecurity.SpringSecurityService
 import groovy.transform.EqualsAndHashCode

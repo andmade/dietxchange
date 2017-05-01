@@ -1,4 +1,4 @@
-package cscie56.dietxchange
+package springsecurity.dietxchange
 
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
@@ -10,6 +10,9 @@ import grails.compiler.GrailsCompileStatic
 class Role implements Serializable {
 
 	private static final long serialVersionUID = 1
+	public static final String ROLE_ADMIN = "ROLE_ADMIN"
+	public static final String ROLE_DIETER = "ROLE_DIETER"
+	public static final String ROLE_ANONYMOUS = "ROLE_ANONYMOUS"
 
 	String authority
 
