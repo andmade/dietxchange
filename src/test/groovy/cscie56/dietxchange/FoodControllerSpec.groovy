@@ -3,21 +3,17 @@ package cscie56.dietxchange
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(DayLogController)
-@Mock([DayLog, Dieter])
-class DayLogControllerSpec extends Specification {
+@TestFor(FoodController)
+@Mock(Food)
+class FoodControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
 
-        params["starchCount"] = 1
-        params["fruitCount"] = 1
-        params["veggieCount"] = 1
-        params["milkCount"] = 1
-        params["proteinCount"] = 1
-        params["fatCount"] = 1
-        params["date"] = new Date()
-        params["dieter"] = new Dieter()
+        params['category'] = 'starch'
+        params['name'] = "Rice"
+        params['portionSize'] = 1/3
+        params['portionUnit'] = 'cup'
     }
 
     void "Test the index action returns the correct model"() {
@@ -26,8 +22,8 @@ class DayLogControllerSpec extends Specification {
             controller.index()
 
         then:"The model is correct"
-            !model.dayLogList
-            model.dayLogCount == 0
+            !model.foodList
+            model.foodCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -35,7 +31,7 @@ class DayLogControllerSpec extends Specification {
             controller.create()
 
         then:"The model is correctly created"
-            model.dayLog!= null
+            model.food!= null
     }
 
     void "Test the save action correctly persists an instance"() {
@@ -43,25 +39,25 @@ class DayLogControllerSpec extends Specification {
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
             request.method = 'POST'
-            def dayLog = new DayLog()
-            dayLog.validate()
-            controller.save(dayLog)
+            def food = new Food()
+            food.validate()
+            controller.save(food)
 
         then:"The create view is rendered again with the correct model"
-            model.dayLog!= null
+            model.food!= null
             view == 'create'
 
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            dayLog = new DayLog(params)
+            food = new Food(params)
 
-            controller.save(dayLog)
+            controller.save(food)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/dayLog/show/1'
+            response.redirectedUrl == '/food/show/1'
             controller.flash.message != null
-            DayLog.count() == 1
+            Food.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -73,11 +69,11 @@ class DayLogControllerSpec extends Specification {
 
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
-            def dayLog = new DayLog(params)
-            controller.show(dayLog)
+            def food = new Food(params)
+            controller.show(food)
 
         then:"A model is populated containing the domain instance"
-            model.dayLog == dayLog
+            model.food == food
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -89,11 +85,11 @@ class DayLogControllerSpec extends Specification {
 
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
-            def dayLog = new DayLog(params)
-            controller.edit(dayLog)
+            def food = new Food(params)
+            controller.edit(food)
 
         then:"A model is populated containing the domain instance"
-            model.dayLog == dayLog
+            model.food == food
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -103,28 +99,28 @@ class DayLogControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/dayLog/index'
+            response.redirectedUrl == '/food/index'
             flash.message != null
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def dayLog = new DayLog()
-            dayLog.validate()
-            controller.update(dayLog)
+            def food = new Food()
+            food.validate()
+            controller.update(food)
 
         then:"The edit view is rendered again with the invalid instance"
             view == 'edit'
-            model.dayLog == dayLog
+            model.food == food
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            dayLog = new DayLog(params).save(flush: true)
-            controller.update(dayLog)
+            food = new Food(params).save(flush: true)
+            controller.update(food)
 
         then:"A redirect is issued to the show action"
-            dayLog != null
-            response.redirectedUrl == "/dayLog/show/$dayLog.id"
+            food != null
+            response.redirectedUrl == "/food/show/$food.id"
             flash.message != null
     }
 
@@ -135,23 +131,23 @@ class DayLogControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/dayLog/index'
+            response.redirectedUrl == '/food/index'
             flash.message != null
 
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def dayLog = new DayLog(params).save(flush: true)
+            def food = new Food(params).save(flush: true)
 
         then:"It exists"
-            DayLog.count() == 1
+            Food.count() == 1
 
         when:"The domain instance is passed to the delete action"
-            controller.delete(dayLog)
+            controller.delete(food)
 
         then:"The instance is deleted"
-            DayLog.count() == 0
-            response.redirectedUrl == '/dayLog/index'
+            Food.count() == 0
+            response.redirectedUrl == '/food/index'
             flash.message != null
     }
 }

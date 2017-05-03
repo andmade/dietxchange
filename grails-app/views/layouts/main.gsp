@@ -7,35 +7,42 @@
         <g:layoutTitle default="Grails"/>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i" rel="stylesheet">
 
     <asset:stylesheet src="application.css"/>
 
     <g:layoutHead/>
 </head>
 <body>
-
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
+    <nav id="site-nav" class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/#">
-                    <i class="fa grails-icon">
-                        <asset:image src="grails-cupsonly-logo-white.svg"/>
-                    </i> Grails
-                </a>
+                <a class="navbar-brand" href="#">Project name</a>
             </div>
-            <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
-                <ul class="nav navbar-nav navbar-right">
-                    <g:pageProperty name="page.nav" />
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
                 </ul>
-            </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <sec:ifLoggedIn>
+                        <li><a>Logged in as <sec:loggedInUserInfo field="username"/></a></li>
+                        <li><a><g:form controller="logout" type="POST"><button class="btn btn-sm align-top" type="submit">Logout</button></g:form></a>                        </li>
+                    </sec:ifLoggedIn>
+                    <sec:ifNotLoggedIn>
+                        <li>
+                            <g:link controller="login" action="index">Login</g:link>
+                        </li>
+                    </sec:ifNotLoggedIn>
+                </ul>
+            </div><!--/.nav-collapse -->
         </div>
-    </div>
+    </nav>
 
     <g:layoutBody/>
 

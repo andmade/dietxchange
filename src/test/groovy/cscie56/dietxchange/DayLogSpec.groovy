@@ -39,11 +39,9 @@ class DayLogSpec extends Specification {
             'breakfast'     |   'lunch' |   'dinner'    |   null    |   false
             'lunch'         |   'lunch' |   'dinner'    |   'snack' |   false
             'breakfast'     |   'dinner'|   'dinner'    |   'snack' |   false
-            'breakfast'     |   'lunch'|    'lunch'     |   'snack' |   false
-            'breakfast'     |   'lunch'|    'dinner'    |   'lunch' |   false
+            'breakfast'     |   'lunch' |   'lunch'     |   'snack' |   false
+            'breakfast'     |   'lunch' |   'dinner'    |   'lunch' |   false
             'breakfast'     |   'lunch' |   'dinner'    |   'snack' |   true
-
-
     }
 
     void "Test getStarchRemainder"() {

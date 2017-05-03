@@ -7,6 +7,8 @@ class Dieter {
     static hasMany = [dayLogs:DayLog]
     static belongsTo = [user:User]
 
+    String firstName
+    String lastName
     Integer starchCount
     Integer fruitCount
     Integer milkCount

@@ -13,3 +13,11 @@
 *= require mobile
 *= require_self
 */
+
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+#site-nav {
+    background-color: #009EA7;
+}

@@ -8,91 +8,91 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 @Secured([Role.ROLE_ADMIN, Role.ROLE_DIETER])
-class DayLogController {
+class FoodController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond DayLog.list(params), model:[dayLogCount: DayLog.count()]
+        respond Food.list(params), model:[foodCount: Food.count()]
     }
 
-    def show(DayLog dayLog) {
-        respond dayLog
+    def show(Food food) {
+        respond food
     }
 
     def create() {
-        respond new DayLog(params)
+        respond new Food(params)
     }
 
     @Transactional
-    def save(DayLog dayLog) {
-        if (dayLog == null) {
+    def save(Food food) {
+        if (food == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
-        if (dayLog.hasErrors()) {
+        if (food.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond dayLog.errors, view:'create'
+            respond food.errors, view:'create'
             return
         }
 
-        dayLog.save flush:true
+        food.save flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'dayLog.label', default: 'DayLog'), dayLog.id])
-                redirect dayLog
+                flash.message = message(code: 'default.created.message', args: [message(code: 'food.label', default: 'Food'), food.id])
+                redirect food
             }
-            '*' { respond dayLog, [status: CREATED] }
+            '*' { respond food, [status: CREATED] }
         }
     }
 
-    def edit(DayLog dayLog) {
-        respond dayLog
+    def edit(Food food) {
+        respond food
     }
 
     @Transactional
-    def update(DayLog dayLog) {
-        if (dayLog == null) {
+    def update(Food food) {
+        if (food == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
-        if (dayLog.hasErrors()) {
+        if (food.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond dayLog.errors, view:'edit'
+            respond food.errors, view:'edit'
             return
         }
 
-        dayLog.save flush:true
+        food.save flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'dayLog.label', default: 'DayLog'), dayLog.id])
-                redirect dayLog
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'food.label', default: 'Food'), food.id])
+                redirect food
             }
-            '*'{ respond dayLog, [status: OK] }
+            '*'{ respond food, [status: OK] }
         }
     }
 
     @Transactional
-    def delete(DayLog dayLog) {
+    def delete(Food food) {
 
-        if (dayLog == null) {
+        if (food == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
-        dayLog.delete flush:true
+        food.delete flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'dayLog.label', default: 'DayLog'), dayLog.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'food.label', default: 'Food'), food.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -102,7 +102,7 @@ class DayLogController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'dayLog.label', default: 'DayLog'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'food.label', default: 'Food'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

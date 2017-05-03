@@ -23,6 +23,8 @@ class DieterSpec extends Specification {
     void "Test Category Minimums"() {
         expect:
         Dieter d = new Dieter(
+                firstName: "Jane",
+                lastName: "Harvard",
                 starchCount: sC,
                 fruitCount: frC,
                 milkCount: mC,
@@ -30,7 +32,7 @@ class DieterSpec extends Specification {
                 proteinCount: pC,
                 fatCount: faC,
                 targetCalories: tC,
-                user: Mock(User)
+                user: new User()
         )
 
         d.validate() == result

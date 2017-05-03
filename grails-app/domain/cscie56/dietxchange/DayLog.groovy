@@ -25,6 +25,10 @@ class DayLog {
         veggieCount(min:1)
         proteinCount(min:1)
         fatCount(min:1)
+        breakfast(nullable:true)
+        lunch(nullable:true)
+        dinner(nullable:true)
+        snack(nullable:true)
         breakfast(nullable: true, validator: {val, obj, errors ->
                 if(!(val == null || val?.type == 'breakfast')) {
                     errors.rejectValue('breakfast', "Meal is not a breakfast")

@@ -55,7 +55,7 @@
 </td>
 </tr>
   <tr>
-    <td class="name">DayLog$$EnhancerByCGLIB$$5aa8fb69</td>
+    <td class="name">DayLog$$EnhancerByCGLIB$$6f2ace81</td>
   </tr>
   <tr>
     <td class="name">DayLog$$FastClassByCGLIB$$4cd95320</td>
@@ -75,7 +75,7 @@
     100%
   </span>
   <span class="absValue">
-    (10/ 10)
+    (14/ 14)
   </span>
 </td>
   </tr>
@@ -156,7 +156,13 @@
 </td>
   </tr>
   <tr>
-    <td class="name">DayLog$staticMethodMissing</td>
+    <td class="name">DayLog$count</td>
+  </tr>
+  <tr>
+    <td class="name">DayLog$list$0</td>
+  </tr>
+  <tr>
+    <td class="name">DayLog$staticMethodMissing$1</td>
   </tr>
 <tr>
   <td class="name"><strong>total</strong></td>
@@ -173,7 +179,7 @@
     100%
   </span>
   <span class="absValue">
-    (36/ 36)
+    (40/ 40)
   </span>
 </td>
 </tr>
@@ -210,82 +216,86 @@
 <b class="fc"><i>25</i>&nbsp;        veggieCount(min:1)</b>
 <b class="fc"><i>26</i>&nbsp;        proteinCount(min:1)</b>
 <b class="fc"><i>27</i>&nbsp;        fatCount(min:1)</b>
-<b class="fc"><i>28</i>&nbsp;        breakfast(nullable: true, validator: {val, obj, errors -&gt;</b>
-<b class="fc"><i>29</i>&nbsp;                if(!(val == null || val?.type == &#39;breakfast&#39;)) {</b>
-<b class="fc"><i>30</i>&nbsp;                    errors.rejectValue(&#39;breakfast&#39;, &quot;Meal is not a breakfast&quot;)</b>
-<i>31</i>&nbsp;            }
-<i>32</i>&nbsp;        })
-<b class="fc"><i>33</i>&nbsp;        lunch(nullable: true, validator: {val, obj, errors -&gt;</b>
-<b class="fc"><i>34</i>&nbsp;                if(!(val == null || val?.type == &#39;lunch&#39;)) {</b>
-<b class="fc"><i>35</i>&nbsp;                    errors.rejectValue(&#39;lunch&#39;, &quot;Meal is not a lunch&quot;)</b>
-<i>36</i>&nbsp;            }
-<i>37</i>&nbsp;        })
-<b class="fc"><i>38</i>&nbsp;        dinner(nullable: true, validator: {val, obj, errors -&gt;</b>
-<b class="fc"><i>39</i>&nbsp;                if(!(val == null || val?.type == &#39;dinner&#39;)) {</b>
-<b class="fc"><i>40</i>&nbsp;                    errors.rejectValue(&#39;dinner&#39;, &quot;Meal is not a dinner&quot;)</b>
-<i>41</i>&nbsp;            }
-<i>42</i>&nbsp;        })
-<b class="fc"><i>43</i>&nbsp;        snack(nullable: true, validator: {val, obj, errors -&gt;</b>
-<b class="fc"><i>44</i>&nbsp;                if(!(val == null || val?.type == &#39;snack&#39;)) {</b>
-<b class="fc"><i>45</i>&nbsp;                    errors.rejectValue(&#39;snack&#39;, &quot;Meal is not a snack&quot;)</b>
-<i>46</i>&nbsp;            }
-<i>47</i>&nbsp;        })
-<i>48</i>&nbsp;    }
-<i>49</i>&nbsp;
-<i>50</i>&nbsp;    Integer getStarchRemainder() {
-<b class="fc"><i>51</i>&nbsp;        if((starchCount - dieter.starchCount) &lt; 0) {</b>
-<b class="fc"><i>52</i>&nbsp;            return 0</b>
-<i>53</i>&nbsp;        } else{
-<b class="fc"><i>54</i>&nbsp;            return starchCount - dieter.starchCount</b>
-<i>55</i>&nbsp;        }
-<i>56</i>&nbsp;    }
-<i>57</i>&nbsp;
-<i>58</i>&nbsp;    Integer getMilkRemainder() {
-<b class="fc"><i>59</i>&nbsp;        if((milkCount - dieter.milkCount) &lt; 0) {</b>
-<b class="fc"><i>60</i>&nbsp;            return 0</b>
-<i>61</i>&nbsp;        } else{
-<b class="fc"><i>62</i>&nbsp;            return milkCount - dieter.milkCount</b>
-<i>63</i>&nbsp;        }
-<i>64</i>&nbsp;    }
-<i>65</i>&nbsp;
-<i>66</i>&nbsp;    Integer getFruitRemainder() {
-<b class="fc"><i>67</i>&nbsp;        if((fruitCount - dieter.fruitCount) &lt; 0) {</b>
-<b class="fc"><i>68</i>&nbsp;            return 0</b>
-<i>69</i>&nbsp;        } else{
-<b class="fc"><i>70</i>&nbsp;            return fruitCount - dieter.fruitCount</b>
-<i>71</i>&nbsp;        }
-<i>72</i>&nbsp;    }
-<i>73</i>&nbsp;
-<i>74</i>&nbsp;    Integer getProteinRemainder() {
-<b class="fc"><i>75</i>&nbsp;        if((proteinCount - dieter.proteinCount) &lt; 0) {</b>
-<b class="fc"><i>76</i>&nbsp;            return 0</b>
-<i>77</i>&nbsp;        } else{
-<b class="fc"><i>78</i>&nbsp;            return proteinCount - dieter.proteinCount</b>
-<i>79</i>&nbsp;        }
-<i>80</i>&nbsp;    }
-<i>81</i>&nbsp;
-<i>82</i>&nbsp;    Integer getVeggieRemainder() {
-<b class="fc"><i>83</i>&nbsp;        if((veggieCount - dieter.veggieCount) &lt; 0) {</b>
-<b class="fc"><i>84</i>&nbsp;            return 0</b>
-<i>85</i>&nbsp;        } else{
-<b class="fc"><i>86</i>&nbsp;            return veggieCount - dieter.veggieCount</b>
-<i>87</i>&nbsp;        }
-<i>88</i>&nbsp;    }
-<i>89</i>&nbsp;
-<i>90</i>&nbsp;    Integer getFatRemainder() {
-<b class="fc"><i>91</i>&nbsp;        if((fatCount - dieter.fatCount) &lt; 0) {</b>
-<b class="fc"><i>92</i>&nbsp;            return 0</b>
-<i>93</i>&nbsp;        } else{
-<b class="fc"><i>94</i>&nbsp;            return fatCount - dieter.fatCount</b>
-<i>95</i>&nbsp;        }
-<i>96</i>&nbsp;    }
-<i>97</i>&nbsp;}
+<b class="fc"><i>28</i>&nbsp;        breakfast(nullable:true)</b>
+<b class="fc"><i>29</i>&nbsp;        lunch(nullable:true)</b>
+<b class="fc"><i>30</i>&nbsp;        dinner(nullable:true)</b>
+<b class="fc"><i>31</i>&nbsp;        snack(nullable:true)</b>
+<b class="fc"><i>32</i>&nbsp;        breakfast(nullable: true, validator: {val, obj, errors -&gt;</b>
+<b class="fc"><i>33</i>&nbsp;                if(!(val == null || val?.type == &#39;breakfast&#39;)) {</b>
+<b class="fc"><i>34</i>&nbsp;                    errors.rejectValue(&#39;breakfast&#39;, &quot;Meal is not a breakfast&quot;)</b>
+<i>35</i>&nbsp;            }
+<i>36</i>&nbsp;        })
+<b class="fc"><i>37</i>&nbsp;        lunch(nullable: true, validator: {val, obj, errors -&gt;</b>
+<b class="fc"><i>38</i>&nbsp;                if(!(val == null || val?.type == &#39;lunch&#39;)) {</b>
+<b class="fc"><i>39</i>&nbsp;                    errors.rejectValue(&#39;lunch&#39;, &quot;Meal is not a lunch&quot;)</b>
+<i>40</i>&nbsp;            }
+<i>41</i>&nbsp;        })
+<b class="fc"><i>42</i>&nbsp;        dinner(nullable: true, validator: {val, obj, errors -&gt;</b>
+<b class="fc"><i>43</i>&nbsp;                if(!(val == null || val?.type == &#39;dinner&#39;)) {</b>
+<b class="fc"><i>44</i>&nbsp;                    errors.rejectValue(&#39;dinner&#39;, &quot;Meal is not a dinner&quot;)</b>
+<i>45</i>&nbsp;            }
+<i>46</i>&nbsp;        })
+<b class="fc"><i>47</i>&nbsp;        snack(nullable: true, validator: {val, obj, errors -&gt;</b>
+<b class="fc"><i>48</i>&nbsp;                if(!(val == null || val?.type == &#39;snack&#39;)) {</b>
+<b class="fc"><i>49</i>&nbsp;                    errors.rejectValue(&#39;snack&#39;, &quot;Meal is not a snack&quot;)</b>
+<i>50</i>&nbsp;            }
+<i>51</i>&nbsp;        })
+<i>52</i>&nbsp;    }
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    Integer getStarchRemainder() {
+<b class="fc"><i>55</i>&nbsp;        if((starchCount - dieter.starchCount) &lt; 0) {</b>
+<b class="fc"><i>56</i>&nbsp;            return 0</b>
+<i>57</i>&nbsp;        } else{
+<b class="fc"><i>58</i>&nbsp;            return starchCount - dieter.starchCount</b>
+<i>59</i>&nbsp;        }
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    Integer getMilkRemainder() {
+<b class="fc"><i>63</i>&nbsp;        if((milkCount - dieter.milkCount) &lt; 0) {</b>
+<b class="fc"><i>64</i>&nbsp;            return 0</b>
+<i>65</i>&nbsp;        } else{
+<b class="fc"><i>66</i>&nbsp;            return milkCount - dieter.milkCount</b>
+<i>67</i>&nbsp;        }
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    Integer getFruitRemainder() {
+<b class="fc"><i>71</i>&nbsp;        if((fruitCount - dieter.fruitCount) &lt; 0) {</b>
+<b class="fc"><i>72</i>&nbsp;            return 0</b>
+<i>73</i>&nbsp;        } else{
+<b class="fc"><i>74</i>&nbsp;            return fruitCount - dieter.fruitCount</b>
+<i>75</i>&nbsp;        }
+<i>76</i>&nbsp;    }
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    Integer getProteinRemainder() {
+<b class="fc"><i>79</i>&nbsp;        if((proteinCount - dieter.proteinCount) &lt; 0) {</b>
+<b class="fc"><i>80</i>&nbsp;            return 0</b>
+<i>81</i>&nbsp;        } else{
+<b class="fc"><i>82</i>&nbsp;            return proteinCount - dieter.proteinCount</b>
+<i>83</i>&nbsp;        }
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    Integer getVeggieRemainder() {
+<b class="fc"><i>87</i>&nbsp;        if((veggieCount - dieter.veggieCount) &lt; 0) {</b>
+<b class="fc"><i>88</i>&nbsp;            return 0</b>
+<i>89</i>&nbsp;        } else{
+<b class="fc"><i>90</i>&nbsp;            return veggieCount - dieter.veggieCount</b>
+<i>91</i>&nbsp;        }
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    Integer getFatRemainder() {
+<b class="fc"><i>95</i>&nbsp;        if((fatCount - dieter.fatCount) &lt; 0) {</b>
+<b class="fc"><i>96</i>&nbsp;            return 0</b>
+<i>97</i>&nbsp;        } else{
+<b class="fc"><i>98</i>&nbsp;            return fatCount - dieter.fatCount</b>
+<i>99</i>&nbsp;        }
+<i>100</i>&nbsp;    }
+<i>101</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2017-04-30 21:13</div>
+    <div style="float:right;">generated on 2017-05-02 18:29</div>
 </div>
 </body>
 </html>
