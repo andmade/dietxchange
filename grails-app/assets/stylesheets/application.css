@@ -14,6 +14,7 @@
 
 * {
     font-family: 'Source Sans Pro', sans-serif;
+    color: #fff;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -21,17 +22,17 @@ h1,h2,h3,h4,h5,h6 {
     font-weight: bold;
 }
 
-h1 {
-    font-size: 2em;
-}
+/*h1 {*/
+    /*font-size: 2em;*/
+/*}*/
 
-h2 {
-    font-size: 1.8em;
-}
+/*h2 {*/
+    /*font-size: 1.8em;*/
+/*}*/
 
-h3 {
-    font-size: 1.5em;
-}
+/*h3 {*/
+    /*font-size: 1.5em;*/
+/*}*/
 
 #diary-date {
     /*font-weight: bold;*/
@@ -40,6 +41,13 @@ h3 {
 
 #diaryRemainingValuesContainer {
     width: 50%;
+    margin-bottom: 50px;
+}
+
+#diaryRemainingValuesContainer .row {
+    border: 3px inset #FFFFFF;
+    border-radius: 5px;
+    padding: 5px;
 }
 .diary-remainder-group {
     font-family: 'Raleway', sans-serif;
@@ -50,11 +58,15 @@ h3 {
 }
 
 .diary-remainder-category-name {
-    font-size: 1em;
+    font-size: 1.5em;
 }
 
 body {
-    background-color: #ebebeb;
+    background-color: #3d4e59;
+}
+
+.add-food-link {
+    font-weight: bold;
 }
 
 #site-nav {
@@ -87,7 +99,7 @@ body {
     min-height: 50px !important;
 }
 #site-nav li.active a, #site-nav li.active a:hover, #site-nav li.active a:focus {
-    background-color: #ebebeb;
+    background-color: #F8F8F8;
     color:#333333 !important;
     border: none;
 }
@@ -116,4 +128,27 @@ body {
 .meal-panel-heading {
     background-color: #c63f17;
     color: #ffffff;
+}
+
+.starch-color {
+    color: #f4d03f;
+}
+
+.protein-color {
+    color: #ffa69a;
+}
+.veggie-color {
+    color:#38f689;
+}
+
+.milk-color {
+    color:#00ffff;
+}
+
+.fruit-color {
+    color: #f9aaf9;
+}
+
+.fats-color {
+    color: #f2784b;
 }
