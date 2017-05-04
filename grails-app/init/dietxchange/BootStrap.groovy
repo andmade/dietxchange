@@ -1,5 +1,6 @@
 package dietxchange
 
+import cscie56.dietxchange.DayLog
 import cscie56.dietxchange.Dieter
 import springsecurity.dietxchange.Role
 import springsecurity.dietxchange.User
@@ -9,6 +10,7 @@ class BootStrap {
 
     def init = { servletContext ->
         createUsersAndRoles()
+        createInitDayLogs()
     }
     def destroy = {
     }
@@ -34,6 +36,14 @@ class BootStrap {
         dieter.save()
         dieter_user.dieterID = dieter.id
         dieter_user.save()
+
+    }
+
+    def createInitDayLogs() {
+        def day1 = new DayLog(date:new Date(), starchCount: 0,fruitCount: 0,milkCount: 0,
+                veggieCount: 0,proteinCount: 0,fatCount: 0,dieter:Dieter.get(1))
+        day1.save()
+
 
     }
 }

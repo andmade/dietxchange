@@ -19,16 +19,12 @@ class DayLog {
     Date date
 
     static constraints = {
-        starchCount(min:1)
-        fruitCount(min:1)
-        milkCount(min:1)
-        veggieCount(min:1)
-        proteinCount(min:1)
-        fatCount(min:1)
-        breakfast(nullable:true)
-        lunch(nullable:true)
-        dinner(nullable:true)
-        snack(nullable:true)
+        starchCount(min:0)
+        fruitCount(min:0)
+        milkCount(min:0)
+        veggieCount(min:0)
+        proteinCount(min:0)
+        fatCount(min:0)
         breakfast(nullable: true, validator: {val, obj, errors ->
                 if(!(val == null || val?.type == 'breakfast')) {
                     errors.rejectValue('breakfast', "Meal is not a breakfast")
@@ -52,50 +48,50 @@ class DayLog {
     }
 
     Integer getStarchRemainder() {
-        if((starchCount - dieter.starchCount) < 0) {
+        if((dieter.starchCount - starchCount) < 0) {
             return 0
         } else{
-            return starchCount - dieter.starchCount
+            return dieter.starchCount - starchCount
         }
     }
 
     Integer getMilkRemainder() {
-        if((milkCount - dieter.milkCount) < 0) {
+        if((dieter.milkCount - milkCount) < 0) {
             return 0
         } else{
-            return milkCount - dieter.milkCount
+            return dieter.milkCount - milkCount
         }
     }
 
     Integer getFruitRemainder() {
-        if((fruitCount - dieter.fruitCount) < 0) {
+        if((dieter.fruitCount - fruitCount) < 0) {
             return 0
         } else{
-            return fruitCount - dieter.fruitCount
+            return dieter.fruitCount - fruitCount
         }
     }
 
     Integer getProteinRemainder() {
-        if((proteinCount - dieter.proteinCount) < 0) {
+        if((dieter.proteinCount - proteinCount) < 0) {
             return 0
         } else{
-            return proteinCount - dieter.proteinCount
+            return dieter.proteinCount - proteinCount
         }
     }
 
     Integer getVeggieRemainder() {
-        if((veggieCount - dieter.veggieCount) < 0) {
+        if((dieter.veggieCount - veggieCount) < 0) {
             return 0
         } else{
-            return veggieCount - dieter.veggieCount
+            return dieter.veggieCount - veggieCount
         }
     }
 
     Integer getFatRemainder() {
-        if((fatCount - dieter.fatCount) < 0) {
+        if((dieter.fatCount - fatCount) < 0) {
             return 0
         } else{
-            return fatCount - dieter.fatCount
+            return dieter.fatCount - fatCount
         }
     }
 }

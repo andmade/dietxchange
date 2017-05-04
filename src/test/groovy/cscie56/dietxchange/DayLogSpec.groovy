@@ -20,16 +20,20 @@ class DayLogSpec extends Specification {
 
     @Unroll
     void "Test Meal Constraints"() {
-        expect:
-            def breakfast = new Meal(type: bType)
-            def lunch = new Meal(type: lType)
-            def dinner = new Meal(type: dType)
-            def snack = new Meal(type: sType)
+        when:
             def dieter = new Dieter()
+            def breakfast = new Meal(type: bType,dieter:dieter)
+            def lunch = new Meal(type: lType,dieter:dieter)
+            def dinner = new Meal(type: dType,dieter:dieter)
+            def snack = new Meal(type: sType,dieter:dieter)
+
             DayLog dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
                     proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter,
                     breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
-            assert dL.validate() == result
+            dL.validate()
+
+        then:
+            dL.hasErrors() != result
 
         where:
             bType           |   lType   |   dType       |   sType   |   result
@@ -47,13 +51,13 @@ class DayLogSpec extends Specification {
     void "Test getStarchRemainder"() {
         when:
         def dieter = new Dieter(starchCount: 3)
-        DayLog dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
+        DayLog dL = new DayLog(starchCount: 4, fruitCount: 1, milkCount: 1, veggieCount: 1,
                 proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter)
         then:
         assert dL.getStarchRemainder() == 0
 
         when:
-        dieter = new Dieter(starchCount: 0)
+        dieter = new Dieter(starchCount: 2)
         dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
                 proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter)
         then:
@@ -63,13 +67,13 @@ class DayLogSpec extends Specification {
     void "Test getMilkRemainder"() {
         when:
         def dieter = new Dieter(milkCount: 3)
-        DayLog dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
+        DayLog dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 4, veggieCount: 1,
                 proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter)
         then:
         assert dL.getMilkRemainder() == 0
 
         when:
-        dieter = new Dieter(milkCount: 0)
+        dieter = new Dieter(milkCount: 2)
         dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
                 proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter)
         then:
@@ -79,13 +83,13 @@ class DayLogSpec extends Specification {
     void "Test getFruitRemainder"() {
         when:
         def dieter = new Dieter(fruitCount: 3)
-        DayLog dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
+        DayLog dL = new DayLog(starchCount: 1, fruitCount: 4, milkCount: 1, veggieCount: 1,
                 proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter)
         then:
         assert dL.getFruitRemainder() == 0
 
         when:
-        dieter = new Dieter(fruitCount: 0)
+        dieter = new Dieter(fruitCount: 2)
         dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
                 proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter)
         then:
@@ -96,12 +100,12 @@ class DayLogSpec extends Specification {
         when:
         def dieter = new Dieter(proteinCount: 3)
         DayLog dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
-                proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter)
+                proteinCount: 4, fatCount: 1, date: new Date(), dieter: dieter)
         then:
         assert dL.getProteinRemainder() == 0
 
         when:
-        dieter = new Dieter(proteinCount: 0)
+        dieter = new Dieter(proteinCount: 2)
         dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
                 proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter)
         then:
@@ -111,13 +115,13 @@ class DayLogSpec extends Specification {
     void "Test getVeggieRemainder"() {
         when:
         def dieter = new Dieter(veggieCount: 3)
-        DayLog dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
+        DayLog dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 4,
                 proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter)
         then:
         assert dL.getVeggieRemainder() == 0
 
         when:
-        dieter = new Dieter(veggieCount: 0)
+        dieter = new Dieter(veggieCount: 2)
         dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
                 proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter)
         then:
@@ -128,12 +132,12 @@ class DayLogSpec extends Specification {
         when:
         def dieter = new Dieter(fatCount: 3)
         DayLog dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
-                proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter)
+                proteinCount: 1, fatCount: 4, date: new Date(), dieter: dieter)
         then:
         assert dL.getFatRemainder() == 0
 
         when:
-        dieter = new Dieter(fatCount: 0)
+        dieter = new Dieter(fatCount: 2)
         dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
                 proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter)
         then:

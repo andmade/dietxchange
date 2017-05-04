@@ -21,7 +21,7 @@ class DieterSpec extends Specification {
 
     @Unroll
     void "Test Category Minimums"() {
-        expect:
+        when:
         Dieter d = new Dieter(
                 firstName: "Jane",
                 lastName: "Harvard",
@@ -34,7 +34,7 @@ class DieterSpec extends Specification {
                 targetCalories: tC,
                 user: new User()
         )
-
+        then:
         d.validate() == result
 
         where:

@@ -4,10 +4,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>
-        <g:layoutTitle default="Grails"/>
+        <g:layoutTitle default="dietxChange"/>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500,500i,700,700i,900" rel="stylesheet">
 
     <asset:stylesheet src="application.css"/>
 
@@ -23,20 +24,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Project name</a>
+                <a class="navbar-brand" href="#">dietXchange</a>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="#">HOME</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <sec:ifLoggedIn>
-                        <li><a>Logged in as <sec:loggedInUserInfo field="username"/></a></li>
-                        <li><a><g:form controller="logout" type="POST"><button class="btn btn-sm align-top" type="submit">Logout</button></g:form></a>                        </li>
-                    </sec:ifLoggedIn>
+                        <li><a href="/diary">MY LOGS</a></li>
+                        <li><a id="logout-button" ><g:form controller="logout" type="POST"><input class="btn btn-link" type="submit" value="LOGOUT"/></g:form></a></li>                                          </sec:ifLoggedIn>
                     <sec:ifNotLoggedIn>
                         <li>
-                            <g:link controller="login" action="index">Login</g:link>
+                            <g:link controller="login" action="index">LOGIN</g:link>
                         </li>
                     </sec:ifNotLoggedIn>
                 </ul>

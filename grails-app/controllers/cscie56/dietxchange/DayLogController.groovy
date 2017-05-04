@@ -12,11 +12,30 @@ class DayLogController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
+    def diary(Integer max) {
+        def today = new Date()
+        def requestedDay = null
+        if(params?.date) {
+            try {
+                requestedDay = Date.parse('yyyy-MM-dd', params.date)
+
+            } catch(java.text.ParseException p) {
+                requestedDay = today
+            }
+        }
         params.max = Math.min(max ?: 10, 100)
         respond DayLog.list(params), model:[dayLogCount: DayLog.count()]
     }
 
+    def index(Integer max) {
+        def today = new Date()
+        def requestedDay = null
+
+        params.max = Math.min(max ?: 10, 100)
+        respond DayLog.list(params), model:[dayLogCount: DayLog.count()]
+    }
+
+    @Secured([Role.ROLE_ADMIN])
     def show(DayLog dayLog) {
         respond dayLog
     }
@@ -80,6 +99,7 @@ class DayLogController {
     }
 
     @Transactional
+    @Secured([Role.ROLE_ADMIN])
     def delete(DayLog dayLog) {
 
         if (dayLog == null) {

@@ -4,7 +4,7 @@ import springsecurity.dietxchange.User
 
 class Dieter {
 
-    static hasMany = [dayLogs:DayLog]
+    static hasMany = [dayLogs:DayLog,meals:Meal]
     static belongsTo = [user:User]
 
     String firstName

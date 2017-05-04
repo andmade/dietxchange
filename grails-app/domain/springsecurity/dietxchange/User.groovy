@@ -1,6 +1,5 @@
 package springsecurity.dietxchange
 
-import cscie56.dietxchange.Dieter
 import grails.plugin.springsecurity.SpringSecurityService
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString

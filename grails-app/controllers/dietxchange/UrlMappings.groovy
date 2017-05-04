@@ -10,6 +10,7 @@ class UrlMappings {
         }
 
         "/"(view:"/index")
+        "/diary"(controller: "dayLog", action: "diary")
         "/grails"(view:"/grails")
         "500"(view:'/error')
         "404"(view:'/notFound')

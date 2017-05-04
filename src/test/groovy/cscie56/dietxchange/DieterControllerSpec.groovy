@@ -19,6 +19,8 @@ class DieterControllerSpec extends Specification {
         params["fatCount"] = 1
         params["targetCalories"] = 1200
         params["user"] = new User()
+        params["firstName"] = "Jane"
+        params["lastName"] = "Harvard"
 
     }
 
