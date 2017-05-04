@@ -34,15 +34,19 @@ class BootStrap {
                 starchCount: 5,milkCount: 1,fruitCount: 2,veggieCount: 4,proteinCount: 7,fatCount: 6,
                 targetCalories: 1400,user: dieter_user)
         dieter.save()
-        dieter_user.dieterID = dieter.id
+        dieter_user.dieter = dieter
         dieter_user.save()
 
     }
 
     def createInitDayLogs() {
-        def day1 = new DayLog(date:new Date(), starchCount: 0,fruitCount: 0,milkCount: 0,
+        def today = new Date().clearTime()
+        def day1 = new DayLog(date:today, starchCount: 0,fruitCount: 0,milkCount: 0,
                 veggieCount: 0,proteinCount: 0,fatCount: 0,dieter:Dieter.get(1))
         day1.save()
+        def day2 = new DayLog(date:today-1, starchCount: 0,fruitCount: 0,milkCount: 0,
+                veggieCount: 0,proteinCount: 0,fatCount: 0,dieter:Dieter.get(1))
+        day2.save()
 
 
     }

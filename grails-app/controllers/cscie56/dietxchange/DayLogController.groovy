@@ -2,6 +2,7 @@ package cscie56.dietxchange
 
 import grails.plugin.springsecurity.annotation.Secured
 import springsecurity.dietxchange.Role
+import springsecurity.dietxchange.User
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -12,19 +13,28 @@ class DayLogController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def diary(Integer max) {
-        def today = new Date()
-        def requestedDay = null
-        if(params?.date) {
-            try {
-                requestedDay = Date.parse('yyyy-MM-dd', params.date)
+    def springSecurityService
 
-            } catch(java.text.ParseException p) {
-                requestedDay = today
-            }
-        }
-        params.max = Math.min(max ?: 10, 100)
-        respond DayLog.list(params), model:[dayLogCount: DayLog.count()]
+    def diary() {
+
+        def today = new Date().clearTime()
+        def requestedDay = today
+        if(params?.date) {
+                try {
+                    requestedDay = Date.parse('yyyy-MM-dd', params.date)
+                    if (!(params.date.equals(requestedDay.format('yyyy-MM-dd')))) {
+                        requestedDay = today
+                    }
+                } catch(java.text.ParseException e) {
+                        println("date not valid")
+                    }
+                }
+
+        User currentUser = springSecurityService.loadCurrentUser()
+        Dieter dieter = currentUser.dieter
+
+        DayLog requestedLog = DayLog.findByDate(requestedDay)
+        model:[dieter: dieter, daylog : requestedLog]
     }
 
     def index(Integer max) {

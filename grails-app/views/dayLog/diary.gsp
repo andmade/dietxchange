@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-    <h1 id="diary-date">Wednesday, May 3, 2017</h1>
+    <h1 id="diary-date">${daylog.date}</h1>
 </div>
 
 <div class="container  text-center" id="diaryRemainingValuesContainer">

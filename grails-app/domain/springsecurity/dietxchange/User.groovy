@@ -1,5 +1,6 @@
 package springsecurity.dietxchange
 
+import cscie56.dietxchange.Dieter
 import grails.plugin.springsecurity.SpringSecurityService
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
@@ -14,7 +15,7 @@ class User implements Serializable {
 
 	SpringSecurityService springSecurityService
 
-    Long dieterID = null
+    Dieter dieter = null
 
 	String username
 	String password
@@ -47,7 +48,7 @@ class User implements Serializable {
 	static constraints = {
 		password blank: false, password: true
 		username blank: false, unique: true
-        dieterID nullable: true
+        dieter nullable: true
 	}
 
 	static mapping = {
