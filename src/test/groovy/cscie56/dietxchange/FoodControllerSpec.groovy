@@ -11,8 +11,9 @@ class FoodControllerSpec extends Specification {
         assert params != null
 
         params['category'] = 'starch'
-        params['name'] = "Rice"
-        params['portionSize'] = 1/3
+        params['subcategory'] = 'cereals_grains'
+        params['name'] = "Barley, couscous, millet, pasta, polenta, quinoa, rice (cooked)"
+        params['portionSize'] = '1/3'
         params['portionUnit'] = 'cup'
     }
 

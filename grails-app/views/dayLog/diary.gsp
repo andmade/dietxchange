@@ -13,45 +13,57 @@
 <div class="container  text-center" id="diaryRemainingValuesContainer">
     <h2>Exchanges Remaining</h2>
     <div class="row">
-        <div class="col-md-2 diary-remainder-group">
-            <p class="diary-remaining-value starch-color">${daylog.starchRemainder}</p>
-            <p class="diary-remainder-category-name starch-color">Starches</p>
+        <div class="col-md-2 diary-remainder-group ">
+            <p class="btn bmd-btn-fab bmd-btn-icon category-circle starch-color">
+                <span class="diary-remaining-value">${daylog.starchRemainder}</span> <br/>
+                <span class="diary-remainder-category-name">Starch</span>
+            </p>
         </div>
-        <div class="col-md-2 diary-remainder-group">
-            <p class="diary-remaining-value fruit-color">${daylog.fruitRemainder}</p>
-            <p class="diary-remainder-category-name fruit-color">Fruits</p>
+        <div class="col-md-2 diary-remainder-group ">
+            <p class="btn bmd-btn-fab btn-default btn-raised category-circle fruit-color">
+                <span class="diary-remaining-value">${daylog.fruitRemainder}</span> <br/>
+                <span class="diary-remainder-category-name">Fruit</span>
+            </p>
         </div>
-        <div class="col-md-2 diary-remainder-group">
-            <p class="diary-remaining-value milk-color">${daylog.milkRemainder}</p>
-            <p class="diary-remainder-category-name milk-color">Milk</p>
+        <div class="col-md-2 diary-remainder-group ">
+            <p class="btn bmd-btn-fab bmd-btn-icon category-circle milk-color">
+                <span class="diary-remaining-value">${daylog.milkRemainder}</span> <br/>
+                <span class="diary-remainder-category-name">Milk</span>
+            </p>
         </div>
-        <div class="col-md-2 diary-remainder-group">
-            <p class="diary-remaining-value veggie-color">${daylog.veggieRemainder}</p>
-            <p class="diary-remainder-category-name veggie-color">Veggies</p>
+        <div class="col-md-2 diary-remainder-group ">
+            <p class="btn bmd-btn-fab bmd-btn-icon category-circle veggie-color">
+                <span class="diary-remaining-value">${daylog.veggieRemainder}</span> <br/>
+                <span class="diary-remainder-category-name">Veggie</span>
+            </p>
         </div>
-        <div class="col-md-2 diary-remainder-group">
-            <p class="diary-remaining-value protein-color">${daylog.proteinRemainder}</p>
-            <p class="diary-remainder-category-name protein-color">Protein</p>
+        <div class="col-md-2 diary-remainder-group ">
+            <p class="btn bmd-btn-fab bmd-btn-icon category-circle protein-color">
+                <span class="diary-remaining-value">${daylog.proteinRemainder}</span> <br/>
+                <span class="diary-remainder-category-name">Protein</span>
+            </p>
         </div>
-        <div class="col-md-2 diary-remainder-group">
-            <p class="diary-remaining-value fats-color">${daylog.fatRemainder}</p>
-            <p class="diary-remainder-category-name fats-color">Fats</p>
+        <div class="col-md-2 diary-remainder-group ">
+            <p class="btn bmd-btn-fab bmd-btn-icon category-circle fats-color">
+                <span class="diary-remaining-value">${daylog.fatRemainder}</span> <br/>
+                <span class="diary-remainder-category-name">Fats</span>
+            </p>
         </div>
+
     </div>
 </div>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
-            <div class="panel panel-default meal-panel card">
+            <div class="panel">
                 <div class="meal-panel-heading panel-heading">
                     <h3 class="panel-title">Breakfast</h3>
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <p class="add-food-link">
-                            <a href="#" data-toggle="modal" data-target="#addFoodModal">
-                            Add food</a>
-                        </p>
+                        <i class="material-icons">add_circle</i>
+                        <a class="add-food-link" href="#" data-toggle="modal" data-target="#addFoodModal">
+                        Add food</a>
                     </li>
                     %{--<g:each in="${this.playersPoints}" var="player">--}%
                     %{--<tr>--}%

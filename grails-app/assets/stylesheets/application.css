@@ -14,12 +14,12 @@
 
 * {
     font-family: 'Source Sans Pro', sans-serif;
-    color: #fff;
+    color: #595959;
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: 'Raleway', sans-serif;
-    font-weight: bold;
+    font-family: 'Raleway', sans-serif !important;
+    font-weight: bold !important;
 }
 
 /*h1 {*/
@@ -44,25 +44,8 @@ h1,h2,h3,h4,h5,h6 {
     margin-bottom: 50px;
 }
 
-#diaryRemainingValuesContainer .row {
-    border: 3px inset #FFFFFF;
-    border-radius: 5px;
-    padding: 5px;
-}
-.diary-remainder-group {
-    font-family: 'Raleway', sans-serif;
-    font-weight: bold;
-}
-.diary-remaining-value {
-    font-size: 1.5em;
-}
-
-.diary-remainder-category-name {
-    font-size: 1.5em;
-}
-
 body {
-    background-color: #3d4e59;
+    background-color: #f8f8f8 !important;
 }
 
 .add-food-link {
@@ -70,9 +53,11 @@ body {
 }
 
 #site-nav {
-    background-color: #c63f17;
+    background-color: #E64A19;
     color: #fff;
     border: none;
+    padding:0;
+    box-shadow: none;
 }
 
 #site-nav a {
@@ -101,7 +86,8 @@ body {
 #site-nav li.active a, #site-nav li.active a:hover, #site-nav li.active a:focus {
     background-color: #F8F8F8;
     color:#333333 !important;
-    border: none;
+    border: #f8f8f8;
+    z-index: 1000;
 }
 .nav .dropdown-menu {
     display: none;
@@ -121,34 +107,73 @@ body {
     display: block;
 }
 
-.card {
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+.meal-panel-heading {
+    background-color: #E64A19 !important;
 }
 
-.meal-panel-heading {
-    background-color: #c63f17;
-    color: #ffffff;
+.panel-title {
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+#diaryRemainingValuesContainer {
+    margin-bottom:20px;
+    margin-top: 20px;
+}
+
+#diaryRemainingValuesContainer .row {
+    padding: 15px;
+}
+.diary-remainder-group {
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+}
+.diary-remaining-value {
+    font-size: 2em !important;
+    color:#fff !important;
+}
+
+.diary-remainder-category-name {
+    font-size: 1em !important;
+    color:#fff !important;
+}
+
+.category-circle {
+    min-width: 6em !important;
+    min-height: 6em !important;
+    font-weight: 900 !important;
+    padding-top: 15px !important;
+    font-size: 1em !important;
+    font-family: 'Source Sans Pro',sans-serif;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12), 0 2px 4px -1px rgba(0,0,0,.2) !important;
 }
 
 .starch-color {
-    color: #f4d03f;
-}
-
-.protein-color {
-    color: #ffa69a;
-}
-.veggie-color {
-    color:#38f689;
-}
-
-.milk-color {
-    color:#00ffff;
+    background-color: #673AB7 !important;
+    color:#fff !important;
 }
 
 .fruit-color {
-    color: #f9aaf9;
+    background-color: #FF4081 !important;
+    color:#fff !important;
+}
+
+.milk-color {
+    background-color: #039BE5 !important;
+    color:#fff !important;
+}
+
+.veggie-color {
+    background-color: #009688 !important;
+    color:#fff !important;
+}
+
+.protein-color {
+    background-color: #D50000 !important;
+    color:#fff !important;
 }
 
 .fats-color {
-    color: #f2784b;
+    background-color: #D9AE00 !important;
+    color:#fff !important;
 }

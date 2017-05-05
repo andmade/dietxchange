@@ -9,8 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:500,500i,700,700i,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
     <asset:stylesheet src="application.css"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.material-design/4.0.2/bootstrap-material-design.min.css">
 
     <g:layoutHead/>
 </head>
