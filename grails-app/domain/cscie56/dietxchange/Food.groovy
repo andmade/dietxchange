@@ -11,7 +11,8 @@ class Food {
     String portionSize
     String portionUnit
     static constraints = {
-        portionUnit(inList: ['ounce','cup','teaspoon','tablespoon','piece','slice','serving','package'])
+        portionUnit(inList: ['ounce','oz','cup','cups','teaspoon','tablespoon','piece',
+                             'pieces','slice','slice','serving','package'])
         category(inList: ['starch','fruit','milk','vegetable','protein','fat'])
         subcategory(inList:['bread','cereals_grains','starchy_veggies','crackers_snacks',
                             'fruit','juices','milk_yogurt','nonstarchy_veggies','lean_meat',

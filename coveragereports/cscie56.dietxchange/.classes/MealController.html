@@ -360,117 +360,121 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package cscie56.dietxchange
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import static org.springframework.http.HttpStatus.*
-<i>4</i>&nbsp;import grails.transaction.Transactional
+<i>3</i>&nbsp;import grails.plugin.springsecurity.annotation.Secured
+<i>4</i>&nbsp;import springsecurity.dietxchange.Role
 <i>5</i>&nbsp;
-<i>6</i>&nbsp;@Transactional(readOnly = true)
-<i>7</i>&nbsp;class MealController {
+<i>6</i>&nbsp;import static org.springframework.http.HttpStatus.*
+<i>7</i>&nbsp;import grails.transaction.Transactional
 <i>8</i>&nbsp;
-<i>9</i>&nbsp;    static allowedMethods = [save: &quot;POST&quot;, update: &quot;PUT&quot;, delete: &quot;DELETE&quot;]
-<i>10</i>&nbsp;
-<i>11</i>&nbsp;    def index(Integer max) {
-<b class="fc"><i>12</i>&nbsp;        params.max = Math.min(max ?: 10, 100)</b>
-<b class="fc"><i>13</i>&nbsp;        respond Meal.list(params), model:[mealCount: Meal.count()]</b>
-<i>14</i>&nbsp;    }
-<i>15</i>&nbsp;
-<i>16</i>&nbsp;    def show(Meal meal) {
-<b class="fc"><i>17</i>&nbsp;        respond meal</b>
+<i>9</i>&nbsp;@Transactional(readOnly = true)
+<i>10</i>&nbsp;@Secured([Role.ROLE_ADMIN, Role.ROLE_DIETER])
+<i>11</i>&nbsp;class MealController {
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    static allowedMethods = [save: &quot;POST&quot;, update: &quot;PUT&quot;, delete: &quot;DELETE&quot;]
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    def index(Integer max) {
+<b class="fc"><i>16</i>&nbsp;        params.max = Math.min(max ?: 10, 100)</b>
+<b class="fc"><i>17</i>&nbsp;        respond Meal.list(params), model:[mealCount: Meal.count()]</b>
 <i>18</i>&nbsp;    }
 <i>19</i>&nbsp;
-<i>20</i>&nbsp;    def create() {
-<b class="fc"><i>21</i>&nbsp;        respond new Meal(params)</b>
+<i>20</i>&nbsp;    def show(Meal meal) {
+<b class="fc"><i>21</i>&nbsp;        respond meal</b>
 <i>22</i>&nbsp;    }
 <i>23</i>&nbsp;
-<i>24</i>&nbsp;    @Transactional
-<i>25</i>&nbsp;    def save(Meal meal) {
-<b class="fc"><i>26</i>&nbsp;        if (meal == null) {</b>
-<b class="nc"><i>27</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
-<b class="nc"><i>28</i>&nbsp;            notFound()</b>
-<b class="nc"><i>29</i>&nbsp;            return</b>
-<i>30</i>&nbsp;        }
-<i>31</i>&nbsp;
-<b class="fc"><i>32</i>&nbsp;        if (meal.hasErrors()) {</b>
-<b class="fc"><i>33</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
-<b class="fc"><i>34</i>&nbsp;            respond meal.errors, view:&#39;create&#39;</b>
-<b class="fc"><i>35</i>&nbsp;            return</b>
-<i>36</i>&nbsp;        }
-<i>37</i>&nbsp;
-<b class="fc"><i>38</i>&nbsp;        meal.save flush:true</b>
-<i>39</i>&nbsp;
-<b class="fc"><i>40</i>&nbsp;        request.withFormat {</b>
-<b class="fc"><i>41</i>&nbsp;            form multipartForm {</b>
-<b class="fc"><i>42</i>&nbsp;                flash.message = message(code: &#39;default.created.message&#39;, args: [message(code: &#39;meal.label&#39;, default: &#39;Meal&#39;), meal.id])</b>
-<b class="fc"><i>43</i>&nbsp;                redirect meal</b>
-<i>44</i>&nbsp;            }
-<b class="pc"><i>45</i>&nbsp;            &#39;*&#39; { respond meal, [status: CREATED] }</b>
-<i>46</i>&nbsp;        }
-<i>47</i>&nbsp;    }
-<i>48</i>&nbsp;
-<i>49</i>&nbsp;    def edit(Meal meal) {
-<b class="fc"><i>50</i>&nbsp;        respond meal</b>
+<i>24</i>&nbsp;    def create() {
+<b class="fc"><i>25</i>&nbsp;        respond new Meal(params)</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @Transactional
+<i>29</i>&nbsp;    def save(Meal meal) {
+<b class="fc"><i>30</i>&nbsp;        if (meal == null) {</b>
+<b class="nc"><i>31</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
+<b class="nc"><i>32</i>&nbsp;            notFound()</b>
+<b class="nc"><i>33</i>&nbsp;            return</b>
+<i>34</i>&nbsp;        }
+<i>35</i>&nbsp;
+<b class="fc"><i>36</i>&nbsp;        if (meal.hasErrors()) {</b>
+<b class="fc"><i>37</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
+<b class="fc"><i>38</i>&nbsp;            respond meal.errors, view:&#39;create&#39;</b>
+<b class="fc"><i>39</i>&nbsp;            return</b>
+<i>40</i>&nbsp;        }
+<i>41</i>&nbsp;
+<b class="fc"><i>42</i>&nbsp;        meal.save flush:true</b>
+<i>43</i>&nbsp;
+<b class="fc"><i>44</i>&nbsp;        request.withFormat {</b>
+<b class="fc"><i>45</i>&nbsp;            form multipartForm {</b>
+<b class="fc"><i>46</i>&nbsp;                flash.message = message(code: &#39;default.created.message&#39;, args: [message(code: &#39;meal.label&#39;, default: &#39;Meal&#39;), meal.id])</b>
+<b class="fc"><i>47</i>&nbsp;                redirect meal</b>
+<i>48</i>&nbsp;            }
+<b class="pc"><i>49</i>&nbsp;            &#39;*&#39; { respond meal, [status: CREATED] }</b>
+<i>50</i>&nbsp;        }
 <i>51</i>&nbsp;    }
 <i>52</i>&nbsp;
-<i>53</i>&nbsp;    @Transactional
-<i>54</i>&nbsp;    def update(Meal meal) {
-<b class="fc"><i>55</i>&nbsp;        if (meal == null) {</b>
-<b class="fc"><i>56</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
-<b class="fc"><i>57</i>&nbsp;            notFound()</b>
-<b class="fc"><i>58</i>&nbsp;            return</b>
-<i>59</i>&nbsp;        }
-<i>60</i>&nbsp;
-<b class="fc"><i>61</i>&nbsp;        if (meal.hasErrors()) {</b>
-<b class="fc"><i>62</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
-<b class="fc"><i>63</i>&nbsp;            respond meal.errors, view:&#39;edit&#39;</b>
-<b class="fc"><i>64</i>&nbsp;            return</b>
-<i>65</i>&nbsp;        }
-<i>66</i>&nbsp;
-<b class="fc"><i>67</i>&nbsp;        meal.save flush:true</b>
-<i>68</i>&nbsp;
-<b class="fc"><i>69</i>&nbsp;        request.withFormat {</b>
-<b class="fc"><i>70</i>&nbsp;            form multipartForm {</b>
-<b class="fc"><i>71</i>&nbsp;                flash.message = message(code: &#39;default.updated.message&#39;, args: [message(code: &#39;meal.label&#39;, default: &#39;Meal&#39;), meal.id])</b>
-<b class="fc"><i>72</i>&nbsp;                redirect meal</b>
-<i>73</i>&nbsp;            }
-<b class="pc"><i>74</i>&nbsp;            &#39;*&#39;{ respond meal, [status: OK] }</b>
-<i>75</i>&nbsp;        }
-<i>76</i>&nbsp;    }
-<i>77</i>&nbsp;
-<i>78</i>&nbsp;    @Transactional
-<i>79</i>&nbsp;    def delete(Meal meal) {
-<i>80</i>&nbsp;
-<b class="fc"><i>81</i>&nbsp;        if (meal == null) {</b>
-<b class="fc"><i>82</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
-<b class="fc"><i>83</i>&nbsp;            notFound()</b>
-<b class="fc"><i>84</i>&nbsp;            return</b>
-<i>85</i>&nbsp;        }
-<i>86</i>&nbsp;
-<b class="fc"><i>87</i>&nbsp;        meal.delete flush:true</b>
-<i>88</i>&nbsp;
-<b class="fc"><i>89</i>&nbsp;        request.withFormat {</b>
-<b class="fc"><i>90</i>&nbsp;            form multipartForm {</b>
-<b class="fc"><i>91</i>&nbsp;                flash.message = message(code: &#39;default.deleted.message&#39;, args: [message(code: &#39;meal.label&#39;, default: &#39;Meal&#39;), meal.id])</b>
-<b class="fc"><i>92</i>&nbsp;                redirect action:&quot;index&quot;, method:&quot;GET&quot;</b>
-<i>93</i>&nbsp;            }
-<b class="pc"><i>94</i>&nbsp;            &#39;*&#39;{ render status: NO_CONTENT }</b>
-<i>95</i>&nbsp;        }
-<i>96</i>&nbsp;    }
-<i>97</i>&nbsp;
-<i>98</i>&nbsp;    protected void notFound() {
-<b class="fc"><i>99</i>&nbsp;        request.withFormat {</b>
-<b class="fc"><i>100</i>&nbsp;            form multipartForm {</b>
-<b class="fc"><i>101</i>&nbsp;                flash.message = message(code: &#39;default.not.found.message&#39;, args: [message(code: &#39;meal.label&#39;, default: &#39;Meal&#39;), params.id])</b>
-<b class="fc"><i>102</i>&nbsp;                redirect action: &quot;index&quot;, method: &quot;GET&quot;</b>
-<i>103</i>&nbsp;            }
-<b class="pc"><i>104</i>&nbsp;            &#39;*&#39;{ render status: NOT_FOUND }</b>
-<i>105</i>&nbsp;        }
-<i>106</i>&nbsp;    }
-<i>107</i>&nbsp;}
+<i>53</i>&nbsp;    def edit(Meal meal) {
+<b class="fc"><i>54</i>&nbsp;        respond meal</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    @Transactional
+<i>58</i>&nbsp;    def update(Meal meal) {
+<b class="fc"><i>59</i>&nbsp;        if (meal == null) {</b>
+<b class="fc"><i>60</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
+<b class="fc"><i>61</i>&nbsp;            notFound()</b>
+<b class="fc"><i>62</i>&nbsp;            return</b>
+<i>63</i>&nbsp;        }
+<i>64</i>&nbsp;
+<b class="fc"><i>65</i>&nbsp;        if (meal.hasErrors()) {</b>
+<b class="fc"><i>66</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
+<b class="fc"><i>67</i>&nbsp;            respond meal.errors, view:&#39;edit&#39;</b>
+<b class="fc"><i>68</i>&nbsp;            return</b>
+<i>69</i>&nbsp;        }
+<i>70</i>&nbsp;
+<b class="fc"><i>71</i>&nbsp;        meal.save flush:true</b>
+<i>72</i>&nbsp;
+<b class="fc"><i>73</i>&nbsp;        request.withFormat {</b>
+<b class="fc"><i>74</i>&nbsp;            form multipartForm {</b>
+<b class="fc"><i>75</i>&nbsp;                flash.message = message(code: &#39;default.updated.message&#39;, args: [message(code: &#39;meal.label&#39;, default: &#39;Meal&#39;), meal.id])</b>
+<b class="fc"><i>76</i>&nbsp;                redirect meal</b>
+<i>77</i>&nbsp;            }
+<b class="pc"><i>78</i>&nbsp;            &#39;*&#39;{ respond meal, [status: OK] }</b>
+<i>79</i>&nbsp;        }
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    @Transactional
+<i>83</i>&nbsp;    def delete(Meal meal) {
+<i>84</i>&nbsp;
+<b class="fc"><i>85</i>&nbsp;        if (meal == null) {</b>
+<b class="fc"><i>86</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
+<b class="fc"><i>87</i>&nbsp;            notFound()</b>
+<b class="fc"><i>88</i>&nbsp;            return</b>
+<i>89</i>&nbsp;        }
+<i>90</i>&nbsp;
+<b class="fc"><i>91</i>&nbsp;        meal.delete flush:true</b>
+<i>92</i>&nbsp;
+<b class="fc"><i>93</i>&nbsp;        request.withFormat {</b>
+<b class="fc"><i>94</i>&nbsp;            form multipartForm {</b>
+<b class="fc"><i>95</i>&nbsp;                flash.message = message(code: &#39;default.deleted.message&#39;, args: [message(code: &#39;meal.label&#39;, default: &#39;Meal&#39;), meal.id])</b>
+<b class="fc"><i>96</i>&nbsp;                redirect action:&quot;index&quot;, method:&quot;GET&quot;</b>
+<i>97</i>&nbsp;            }
+<b class="pc"><i>98</i>&nbsp;            &#39;*&#39;{ render status: NO_CONTENT }</b>
+<i>99</i>&nbsp;        }
+<i>100</i>&nbsp;    }
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    protected void notFound() {
+<b class="fc"><i>103</i>&nbsp;        request.withFormat {</b>
+<b class="fc"><i>104</i>&nbsp;            form multipartForm {</b>
+<b class="fc"><i>105</i>&nbsp;                flash.message = message(code: &#39;default.not.found.message&#39;, args: [message(code: &#39;meal.label&#39;, default: &#39;Meal&#39;), params.id])</b>
+<b class="fc"><i>106</i>&nbsp;                redirect action: &quot;index&quot;, method: &quot;GET&quot;</b>
+<i>107</i>&nbsp;            }
+<b class="pc"><i>108</i>&nbsp;            &#39;*&#39;{ render status: NOT_FOUND }</b>
+<i>109</i>&nbsp;        }
+<i>110</i>&nbsp;    }
+<i>111</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2017-05-02 18:29</div>
+    <div style="float:right;">generated on 2017-05-05 13:19</div>
 </div>
 </body>
 </html>

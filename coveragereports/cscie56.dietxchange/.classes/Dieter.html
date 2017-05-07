@@ -192,51 +192,53 @@
 <i>4</i>&nbsp;
 <i>5</i>&nbsp;class Dieter {
 <i>6</i>&nbsp;
-<i>7</i>&nbsp;    static hasMany = [dayLogs:DayLog]
+<i>7</i>&nbsp;    static hasMany = [dayLogs:DayLog,meals:Meal]
 <i>8</i>&nbsp;    static belongsTo = [user:User]
 <i>9</i>&nbsp;
-<i>10</i>&nbsp;    Integer starchCount
-<i>11</i>&nbsp;    Integer fruitCount
-<i>12</i>&nbsp;    Integer milkCount
-<i>13</i>&nbsp;    Integer veggieCount
-<i>14</i>&nbsp;    Integer proteinCount
-<i>15</i>&nbsp;    Integer fatCount
-<i>16</i>&nbsp;    Integer targetCalories
-<i>17</i>&nbsp;    Map&lt;Food,String&gt; favoriteFoods = [:]
-<i>18</i>&nbsp;
-<i>19</i>&nbsp;
-<i>20</i>&nbsp;    static constraints = {
-<b class="fc"><i>21</i>&nbsp;        starchCount(min:1)</b>
-<b class="fc"><i>22</i>&nbsp;        fruitCount(min:1)</b>
-<b class="fc"><i>23</i>&nbsp;        milkCount(min:1)</b>
-<b class="fc"><i>24</i>&nbsp;        veggieCount(min:1)</b>
-<b class="fc"><i>25</i>&nbsp;        proteinCount(min:1)</b>
-<b class="fc"><i>26</i>&nbsp;        fatCount(min:1)</b>
-<b class="fc"><i>27</i>&nbsp;        targetCalories(min:1200)</b>
-<i>28</i>&nbsp;    }
-<i>29</i>&nbsp;
-<i>30</i>&nbsp;    Map&lt;Food,String&gt; getBreakfastFaves() {
-<b class="fc"><i>31</i>&nbsp;        favoriteFoods.findAll{it.value == &#39;breakfast&#39;}</b>
-<i>32</i>&nbsp;    }
-<i>33</i>&nbsp;    Map&lt;Food,String&gt; getLunchFaves() {
-<b class="fc"><i>34</i>&nbsp;        favoriteFoods.findAll{it.value == &#39;lunch&#39;}</b>
-<i>35</i>&nbsp;
-<i>36</i>&nbsp;    }
-<i>37</i>&nbsp;    Map&lt;Food,String&gt; getDinnerFaves() {
-<b class="fc"><i>38</i>&nbsp;        favoriteFoods.findAll { it.value == &#39;dinner&#39; }</b>
-<i>39</i>&nbsp;    }
-<i>40</i>&nbsp;
-<i>41</i>&nbsp;    Map&lt;Food,String&gt; getSnackFaves() {
-<b class="fc"><i>42</i>&nbsp;        favoriteFoods.findAll{it.value == &#39;snack&#39;}</b>
-<i>43</i>&nbsp;
-<i>44</i>&nbsp;    }
-<i>45</i>&nbsp;}
+<i>10</i>&nbsp;    String firstName
+<i>11</i>&nbsp;    String lastName
+<i>12</i>&nbsp;    Integer starchCount
+<i>13</i>&nbsp;    Integer fruitCount
+<i>14</i>&nbsp;    Integer milkCount
+<i>15</i>&nbsp;    Integer veggieCount
+<i>16</i>&nbsp;    Integer proteinCount
+<i>17</i>&nbsp;    Integer fatCount
+<i>18</i>&nbsp;    Integer targetCalories
+<i>19</i>&nbsp;    Map&lt;Food,String&gt; favoriteFoods = [:]
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    static constraints = {
+<b class="fc"><i>23</i>&nbsp;        starchCount(min:1)</b>
+<b class="fc"><i>24</i>&nbsp;        fruitCount(min:1)</b>
+<b class="fc"><i>25</i>&nbsp;        milkCount(min:1)</b>
+<b class="fc"><i>26</i>&nbsp;        veggieCount(min:1)</b>
+<b class="fc"><i>27</i>&nbsp;        proteinCount(min:1)</b>
+<b class="fc"><i>28</i>&nbsp;        fatCount(min:1)</b>
+<b class="fc"><i>29</i>&nbsp;        targetCalories(min:1200)</b>
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    Map&lt;Food,String&gt; getBreakfastFaves() {
+<b class="fc"><i>33</i>&nbsp;        favoriteFoods.findAll{it.value == &#39;breakfast&#39;}</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;    Map&lt;Food,String&gt; getLunchFaves() {
+<b class="fc"><i>36</i>&nbsp;        favoriteFoods.findAll{it.value == &#39;lunch&#39;}</b>
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;    Map&lt;Food,String&gt; getDinnerFaves() {
+<b class="fc"><i>40</i>&nbsp;        favoriteFoods.findAll { it.value == &#39;dinner&#39; }</b>
+<i>41</i>&nbsp;    }
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    Map&lt;Food,String&gt; getSnackFaves() {
+<b class="fc"><i>44</i>&nbsp;        favoriteFoods.findAll{it.value == &#39;snack&#39;}</b>
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    }
+<i>47</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2017-05-02 18:29</div>
+    <div style="float:right;">generated on 2017-05-05 13:19</div>
 </div>
 </body>
 </html>

@@ -12,6 +12,22 @@ class FoodController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def getFoods() {
+
+        def resultsList = []
+        println(params?.category)
+        if(params?.category) {
+            switch(params?.category) {
+                case "starch":
+                    resultsList = Food.findAllByCategory("starch")
+                    println(resultsList)
+                    break
+            }
+        }
+
+        render template: 'foodresults', model:[foodResults: resultsList]
+    }
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Food.list(params), model:[foodCount: Food.count()]

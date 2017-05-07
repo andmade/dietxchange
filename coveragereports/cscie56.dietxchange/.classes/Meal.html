@@ -96,21 +96,22 @@
 <i>3</i>&nbsp;class Meal {
 <i>4</i>&nbsp;
 <i>5</i>&nbsp;    static hasMany = [foods:Food]
-<i>6</i>&nbsp;    static belongsTo = [dayLog:DayLog, dieter:Dieter]
+<i>6</i>&nbsp;    static belongsTo = [dayLog:DayLog]
 <i>7</i>&nbsp;    String type
-<i>8</i>&nbsp;
-<i>9</i>&nbsp;    static constraints = {
-<b class="fc"><i>10</i>&nbsp;        type(inList: [&#39;breakfast&#39;,&#39;lunch&#39;,&#39;dinner&#39;,&#39;snack&#39;])</b>
-<i>11</i>&nbsp;
-<i>12</i>&nbsp;    }
-<i>13</i>&nbsp;
-<i>14</i>&nbsp;}
+<i>8</i>&nbsp;    Dieter dieter
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    static constraints = {
+<b class="fc"><i>11</i>&nbsp;        type(inList: [&#39;breakfast&#39;,&#39;lunch&#39;,&#39;dinner&#39;,&#39;snack&#39;])</b>
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    }
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2017-05-02 18:29</div>
+    <div style="float:right;">generated on 2017-05-05 13:19</div>
 </div>
 </body>
 </html>

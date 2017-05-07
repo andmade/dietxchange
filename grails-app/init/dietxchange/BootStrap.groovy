@@ -2,6 +2,7 @@ package dietxchange
 
 import cscie56.dietxchange.DayLog
 import cscie56.dietxchange.Dieter
+import cscie56.dietxchange.Food
 import springsecurity.dietxchange.Role
 import springsecurity.dietxchange.User
 import springsecurity.dietxchange.UserRole
@@ -10,7 +11,9 @@ class BootStrap {
 
     def init = { servletContext ->
         createUsersAndRoles()
+        createSeederFoods()
         createInitDayLogs()
+
     }
     def destroy = {
     }
@@ -49,5 +52,26 @@ class BootStrap {
         day2.save()
 
 
+    }
+
+    def createSeederFoods() {
+        def foodList = [
+                    new Food(category: "starch",subcategory:"bread",portionSize: "1",portionUnit: "slice",
+                        name:"Bread, whole/white/rye/pumpernickel/raisin"),
+                    new Food(category: "starch", subcategory: "bread" , portionSize: "1", portionUnit: "piece",
+                        name: 'Pancake, 4" across, 1/4" thick'),
+                    new Food(category: "starch", subcategory: "cereals_grains",portionSize: "1", portionUnit: "cup",
+                        name: "Rice, barley, couscous, millet, pasta, polenta, quinoa (cooked)"),
+                    new Food(category: "starch", subcategory: "cereals_grains", portionSize: "1/2", portionUnit: "cup",
+                        name: "Oatmeal, cooked"),
+                    new Food(category: "starch", subcategory: "starchy_veggies",portionSize: "1/2", portionUnit: "cup",
+                        name: "Corn"),
+                    new Food(category: "starch", subcategory: "starchy_veggies",portionSize: "3", portionUnit: "oz",
+                        name: "Potato baked, with skin"),
+                    new Food(category: "starch", subcategory: "crackers_snack", portionSize: "8", portionUnit: "pieces",
+                        name:"Animal crackers")]
+
+
+        foodList.each {it.save()}
     }
 }

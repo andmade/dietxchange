@@ -34,7 +34,7 @@ class DayLogController {
         Dieter dieter = currentUser.dieter
 
         DayLog requestedLog = DayLog.findByDate(requestedDay)
-        model:[dieter: dieter, daylog : requestedLog]
+        model:[date: requestedDay, dieter: dieter, daylog : requestedLog]
     }
 
     def index(Integer max) {

@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-    <h1 id="diary-date">${daylog.date}</h1>
+    <h1 id="diary-date">${date}</h1>
 </div>
 
 <div class="container  text-center" id="diaryRemainingValuesContainer">
@@ -52,7 +52,7 @@
 
     </div>
 </div>
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-md-3">
             <div class="panel">
@@ -61,9 +61,9 @@
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <i class="material-icons">add_circle</i>
-                        <a class="add-food-link" href="#" data-toggle="modal" data-target="#addFoodModal">
-                        Add food</a>
+
+                        <a class="add-food-link" href="#" data-toggle="modal" data-target="#addBreakfastFoodModal">
+                            <i class="material-icons">add_circle</i> Add food</a>
                     </li>
                     %{--<g:each in="${this.playersPoints}" var="player">--}%
                     %{--<tr>--}%
@@ -72,22 +72,33 @@
                     %{--<td><stats:average value="${player.gamestats.points}" size="${player.gamestats.size()}"/></td>--}%
                     %{--</tr>--}%
                     %{--</g:each>--}%
-                </ul>
             </div>
+        </ul>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="addFoodModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="addBreakfastFoodModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4>Add new food</h4>
+                <h4>Choose a Food</h4>
             </div>
             <div class="modal-body">
-                <g:form controller="Meal" action="save" params="[daylog:daylog.id]">
+                <g:form controller="Meal" action="save" params="[daylog:daylog?.id]">
+                    <div id="modalCategoryButtonsContainer" class="text-center">
+                        <button data-category-type="starch" class="btn btn-raised category-button starch-color">Starches</button>
+                        <button data-category-type="fruit" class="btn btn-raised category-button fruit-color">Fruits</button>
+                        <button data-category-type="milk" id="milkButton" class="btn btn-raised category-button milk-color">Milk</button>
+                        <button data-category-type="veggie" id="veggieButton" class="btn btn-raised category-button veggie-color">Veggies</button>
+                        <button data-category-type="protein" id="proteinButton" class="btn btn-raised category-button protein-color">Proteins</button>
+                        <button data-category-type="fats" id="fatsButton" class="btn btn-raised category-button fats-color">Fats</button>
+                    </div>
+                    <div id="categoryResultsContainer">
+
+                    </div>
                     <div>
                         <label for="blogentrytitle">Entry title</label>
                         <input type="text" class="form-control" id="blogentrytitle" name="title"></text>
@@ -97,9 +108,11 @@
                         <textarea class="form-control" id="blogentrytext" rows="3" name="text"></textarea>
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                    <button id="blogSaveButton" type="submit" class="btn btn-primary" value="false" name="published">Save</button>
-                    <button id="blogSavePublishButton" type="submit" class="btn btn-primary" value="true" name="published">Save &amp; Publish</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    <button id="addMealButton" type="submit" class="btn btn-primary"
+                        data-daylog-id="${daylog?.id}" data-dieter-id="${dieter?.id}" data-meal-type="breakfast">
+                        Add To Breakfast
+                    </button>
                     </div>
                 </g:form>
             </div>
