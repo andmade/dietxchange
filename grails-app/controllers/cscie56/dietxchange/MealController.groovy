@@ -10,8 +10,34 @@ import grails.transaction.Transactional
 @Secured([Role.ROLE_ADMIN, Role.ROLE_DIETER])
 class MealController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [addFoodToMeal: "POST", save: "POST", update: "PUT", delete: "DELETE"]
 
+    def addFoodToMeal() {
+        def mealtype = params?.mealtype
+            DayLog daylog
+            if(params?.daylogID) {
+                daylog = DayLog.get(params?.daylogID)
+            }
+            println(daylog)
+            def dieter = Dieter.get(params?.dieterID)
+            def date = Date.parse('yyyy-MM-dd', params.date)
+            def food = Food.get(params?.foodID)
+            if(!daylog) {
+                daylog = new DayLog(dieter: dieter, date: date)
+            }
+
+            if(daylog.breakfast) {
+                    println(food)
+                    daylog.breakfast.addToFoods(food)
+
+            } else{
+                daylog.breakfast = new Meal(type:'breakfast',dieter:dieter, dayLog: daylog)
+            }
+            daylog.breakfast.save(flush:true)
+            daylog.save(flush:true)
+            redirect(controller: "dayLog", action: "diary", params:[date: params.date])
+
+    }
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Meal.list(params), model:[mealCount: Meal.count()]

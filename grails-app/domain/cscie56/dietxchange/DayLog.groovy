@@ -9,12 +9,12 @@ class DayLog {
     Meal dinner = null
     Meal snack = null
 
-    Integer starchCount
-    Integer fruitCount
-    Integer milkCount
-    Integer veggieCount
-    Integer proteinCount
-    Integer fatCount
+    Integer starchCount = 0
+    Integer fruitCount = 0
+    Integer milkCount = 0
+    Integer veggieCount = 0
+    Integer proteinCount = 0
+    Integer fatCount = 0
 
     Date date
 

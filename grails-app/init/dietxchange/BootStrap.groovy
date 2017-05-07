@@ -44,13 +44,10 @@ class BootStrap {
 
     def createInitDayLogs() {
         def today = new Date().clearTime()
-        def day1 = new DayLog(date:today, starchCount: 0,fruitCount: 0,milkCount: 0,
-                veggieCount: 0,proteinCount: 0,fatCount: 0,dieter:Dieter.get(1))
+        def day1 = new DayLog(date:today, dieter:Dieter.get(1))
         day1.save()
-        def day2 = new DayLog(date:today-1, starchCount: 0,fruitCount: 0,milkCount: 0,
-                veggieCount: 0,proteinCount: 0,fatCount: 0,dieter:Dieter.get(1))
+        def day2 = new DayLog(date:today-1, dieter:Dieter.get(1))
         day2.save()
-
 
     }
 
@@ -61,7 +58,7 @@ class BootStrap {
                     new Food(category: "starch", subcategory: "bread" , portionSize: "1", portionUnit: "piece",
                         name: 'Pancake, 4" across, 1/4" thick'),
                     new Food(category: "starch", subcategory: "cereals_grains",portionSize: "1", portionUnit: "cup",
-                        name: "Rice, barley, couscous, millet, pasta, polenta, quinoa (cooked)"),
+                        name: "Rice, couscous, pasta, quinoa (cooked)"),
                     new Food(category: "starch", subcategory: "cereals_grains", portionSize: "1/2", portionUnit: "cup",
                         name: "Oatmeal, cooked"),
                     new Food(category: "starch", subcategory: "starchy_veggies",portionSize: "1/2", portionUnit: "cup",

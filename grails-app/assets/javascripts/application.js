@@ -22,47 +22,6 @@ if (typeof jQuery !== 'undefined') {
 
 $(document).ready(function() {
 
-    $("button.approve-button").on("click",function (evt) {
-        var blogEntry_id = $(this).data('blogentry-id');
-        var comment_id = $(this).data('comment-id');
-        console.log(blogEntry_id);
-        var request = $.ajax({
-            url: "/comment/approve/" + comment_id,
-            method: 'POST'
-        });
-
-        request.done(function(data) {
-            console.log(evt.target.parentNode.parentNode);
-            var comment = evt.target.parentNode.parentNode;
-            $(comment).removeClass("alert alert-warning").addClass("well well-lg");
-            $(evt.target.parentNode).remove();
-        })
-    });
-
-    $("button.reject-button").on("click",function (evt) {
-        var blogEntry_id = $(this).data('blogentry-id');
-        var comment_id = $(this).data('comment-id');
-        console.log(blogEntry_id);
-        var request = $.ajax({
-            url: "/comment/reject/" + comment_id,
-            method: 'POST'
-        });
-
-        request.done(function(data) {
-            console.log(evt.target.parentNode.parentNode);
-            var comment = evt.target.parentNode.parentNode;
-            $(comment).removeClass("alert alert-warning").addClass("alert alert-danger rejected-comment ");
-            $(evt.target.parentNode).remove();
-        })
-    });
-
-    $("#addMealButton").on("click", function (evt) {
-       var daylog_id = $(this).data('daylog-id');
-       var dieter_id = $(this).data('dieter-id');
-       var meal_type = $(this).data('meal-type');
-
-    });
-
     $(".category-button").on("click", function (evt) {
         evt.preventDefault();
         $('.category-button').css("opacity","0.3");
@@ -74,13 +33,21 @@ $(document).ready(function() {
        });
 
         request.done(function(data) {
-            console.log(data);
+            // console.log(data);
             var resultsContainer = $('#categoryResultsContainer');
             $(resultsContainer).html(data);
         })
+    });
 
+    $(document).on("click",".food-item-panel", function (evt) {
+        var parentNode = evt.target.parentNode;
+        $('#foodDetails').detach().appendTo(parentNode);
+        $('.collapse-food-size').text($(this).attr("data-food-size"));
+        $('.collapse-food-unit').text($(this).attr("data-food-unit"));
+        $('#addMealButton').attr("value",$(this).attr("data-food-id"));
 
     });
 
+    $('')
 });
 
