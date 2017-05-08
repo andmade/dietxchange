@@ -7,11 +7,11 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-@Secured([Role.ROLE_ADMIN, Role.ROLE_DIETER])
+@Secured([Role.ROLE_ADMIN])
 class FoodController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+    @Secured([Role.ROLE_ADMIN, Role.ROLE_DIETER])
     def getFoods() {
 
         def resultsList = []

@@ -69,7 +69,7 @@
                 </div>
                 <ul class="list-group">
                     <g:each in="${this.daylog?.breakfast?.foods}" var="food">
-                        <g:render template="/food/fooditemrow" model="[food:food]"/>
+                        <g:render template="/food/fooditemrow" model="[food:food,mealID:this.daylog?.breakfast?.id,date:formatDate(format:'yyyy-MM-dd',date:date)]"/>
                     </g:each>
                     <li class="list-group-item">
                         <a class="add-food-link" href="#" data-toggle="modal" data-target="#addFoodModal"
@@ -87,7 +87,7 @@
                 </div>
                 <ul class="list-group">
                     <g:each in="${this.daylog?.lunch?.foods}" var="food">
-                        <g:render template="/food/fooditemrow" model="[food:food]"/>
+                        <g:render template="/food/fooditemrow" model="[food:food,mealID:this.daylog?.lunch?.id,date:formatDate(format:'yyyy-MM-dd',date:date)]"/>
                     </g:each>
                     <li class="list-group-item">
                         <a class="add-food-link" href="#" data-toggle="modal" data-target="#addFoodModal"
@@ -105,7 +105,7 @@
                 </div>
                 <ul class="list-group">
                     <g:each in="${this.daylog?.dinner?.foods}" var="food">
-                        <g:render template="/food/fooditemrow" model="[food:food]"/>
+                        <g:render template="/food/fooditemrow" model="[food:food,mealID:this.daylog?.dinner?.id,date:formatDate(format:'yyyy-MM-dd',date:date)]"/>
                     </g:each>
                     <li class="list-group-item">
                         <a class="add-food-link" href="#" data-toggle="modal" data-target="#addFoodModal"
@@ -123,7 +123,7 @@
                 </div>
                 <ul class="list-group">
                     <g:each in="${this.daylog?.snack?.foods}" var="food">
-                        <g:render template="/food/fooditemrow" model="[food:food]"/>
+                        <g:render template="/food/fooditemrow" model="[food:food,mealID:this.daylog?.snack?.id,date:formatDate(format:'yyyy-MM-dd',date:date)]"/>
                     </g:each>
                     <li class="list-group-item">
                         <a class="add-food-link" href="#" data-toggle="modal" data-target="#addFoodModal"

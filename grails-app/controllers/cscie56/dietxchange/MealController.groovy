@@ -7,11 +7,23 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-@Secured([Role.ROLE_ADMIN, Role.ROLE_DIETER])
+@Secured([Role.ROLE_ADMIN])
 class MealController {
 
-    static allowedMethods = [addFoodToMeal: "POST", save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [addFoodToMeal: "POST", removeFoodFromMeal: "DELETE", save: "POST", update: "PUT", delete: "DELETE"]
+    @Secured([Role.ROLE_ADMIN, Role.ROLE_DIETER])
+    def removeFoodFromMeal() {
+        def meal = Meal.get(params?.mealID)
+        def food = Food.get(params?.foodID)
+        def daylog = meal.dayLog
+        meal.removeFromFoods(food)
+        meal.save()
+        daylog.removeFromCounts(food)
+        daylog.save(flush:true)
+        redirect(controller: "dayLog", action: "diary", params:[date: params?.date])
 
+    }
+    @Secured([Role.ROLE_ADMIN, Role.ROLE_DIETER])
     def addFoodToMeal() {
         def mealtype = params?.mealtype
 

@@ -12,8 +12,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 text-center">
-            <h1>Homepage forthcoming</h1>
-            <p>Login credentials: andmade/user</p>
+            <h1 id="indexTitle">dietXchange</h1>
+            <h2>An app for those looking to manage their exchange diet online</h2>
+            <br/>
+            <h5>Login using credentials <br/> username: andmade, password: user</h5>
+            <h5>Then click on 'My Logs' to demo the app</h5>
         </div>
     </div>
 

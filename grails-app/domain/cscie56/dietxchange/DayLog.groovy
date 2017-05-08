@@ -50,7 +50,7 @@ class DayLog {
     }
 
     void addToCounts(Food food) {
-        switch(food.category) {
+        switch (food.category) {
             case 'starch':
                 starchCount++
                 break
@@ -68,6 +68,28 @@ class DayLog {
                 break
             default:
                 fatCount++
+                break
+        }
+    }
+    void removeFromCounts(Food food) {
+        switch(food.category) {
+            case 'starch':
+                starchCount--
+                break
+            case 'fruit':
+                fruitCount--
+                break
+            case 'veggies':
+                veggieCount--
+                break
+            case 'milk':
+                milkCount--
+                break
+            case 'protein':
+                proteinCount--
+                break
+            default:
+                fatCount--
                 break
         }
     }
