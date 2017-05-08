@@ -2,6 +2,7 @@ package cscie56.dietxchange
 
 class Meal {
 
+    List foods
     static hasMany = [foods:Food]
     static belongsTo = [dayLog:DayLog]
     String type

@@ -22,14 +22,16 @@ class DayLogSpec extends Specification {
     void "Test Meal Constraints"() {
         when:
             def dieter = new Dieter()
-            def breakfast = new Meal(type: bType,dieter:dieter)
-            def lunch = new Meal(type: lType,dieter:dieter)
-            def dinner = new Meal(type: dType,dieter:dieter)
-            def snack = new Meal(type: sType,dieter:dieter)
+            DayLog dL = new DayLog(date: new Date(), dieter: dieter)
+            def breakfast = new Meal(type: bType,dieter:dieter, dayLog: dL)
+            def lunch = new Meal(type: lType,dieter:dieter, dayLog: dL)
+            def dinner = new Meal(type: dType,dieter:dieter, dayLog: dL)
+            def snack = new Meal(type: sType,dieter:dieter, dayLog: dL)
 
-            DayLog dL = new DayLog(starchCount: 1, fruitCount: 1, milkCount: 1, veggieCount: 1,
-                    proteinCount: 1, fatCount: 1, date: new Date(), dieter: dieter,
-                    breakfast: breakfast, lunch: lunch, dinner: dinner, snack: snack)
+            dL.breakfast = breakfast
+            dL.lunch = lunch
+            dL.dinner = dinner
+            dL.snack = snack
             dL.validate()
 
         then:

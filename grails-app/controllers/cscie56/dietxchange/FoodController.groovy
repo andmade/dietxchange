@@ -15,12 +15,25 @@ class FoodController {
     def getFoods() {
 
         def resultsList = []
-        println(params?.category)
         if(params?.category) {
             switch(params?.category) {
                 case "starch":
                     resultsList = Food.findAllByCategory("starch")
-                    println(resultsList)
+                    break
+                case "fruit":
+                    resultsList = Food.findAllByCategory("fruit")
+                    break
+                case "milk":
+                    resultsList = Food.findAllByCategory("milk")
+                    break
+                case "veggies":
+                    resultsList = Food.findAllByCategory("veggies")
+                    break
+                case "protein":
+                    resultsList = Food.findAllByCategory("protein")
+                    break
+                default:
+                    resultsList = Food.findAllByCategory("fats")
                     break
             }
         }

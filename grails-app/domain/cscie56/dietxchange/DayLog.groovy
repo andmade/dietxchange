@@ -18,6 +18,8 @@ class DayLog {
 
     Date date
 
+    static mappedBy = [ breakfast: "none",lunch:"none",dinner:"none",snack:"none" ]
+
     static constraints = {
         starchCount(min:0)
         fruitCount(min:0)
@@ -45,6 +47,29 @@ class DayLog {
                     errors.rejectValue('snack', "Meal is not a snack")
             }
         })
+    }
+
+    void addToCounts(Food food) {
+        switch(food.category) {
+            case 'starch':
+                starchCount++
+                break
+            case 'fruit':
+                fruitCount++
+                break
+            case 'veggies':
+                veggieCount++
+                break
+            case 'milk':
+                milkCount++
+                break
+            case 'protein':
+                proteinCount++
+                break
+            default:
+                fatCount++
+                break
+        }
     }
 
     Integer getStarchRemainder() {

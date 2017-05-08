@@ -33,7 +33,6 @@ $(document).ready(function() {
        });
 
         request.done(function(data) {
-            // console.log(data);
             var resultsContainer = $('#categoryResultsContainer');
             $(resultsContainer).html(data);
         })
@@ -47,7 +46,25 @@ $(document).ready(function() {
         $('#addMealButton').attr("value",$(this).attr("data-food-id"));
 
     });
+    $(document).on("click",".food-item-panel", function (evt) {
+        var parentNode = evt.target.parentNode;
+        var meal_type = $("input[name='mealtype']").val();
+        $('#foodDetails').detach().appendTo(parentNode);
+        $('.collapse-food-size').text($(this).attr("data-food-size"));
+        $('.collapse-food-unit').text($(this).attr("data-food-unit"));
+        $('#addMealButton').attr("value",$(this).attr("data-food-id")).attr("data-meal-type",meal_type);
+        $('#addMealButton').text("Add to " + meal_type )
 
-    $('')
+    });
+
+    $('#addFoodModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var meal_type = button.data('meal-type');
+        $(this).find("input[name='mealtype']").val(meal_type);
+    });
+
+    $('#addFoodModal').on('hide.bs.modal', function (event) {
+        $("#foodDetails").removeClass('in');
+    });
 });
 

@@ -39,18 +39,18 @@
   <td class="name">FoodController</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    88.9%
   </span>
   <span class="absValue">
-    (8/ 8)
+    (8/ 9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.6%
+    74.4%
   </span>
   <span class="absValue">
-    (29/ 32)
+    (29/ 39)
   </span>
 </td>
 </tr>
@@ -337,18 +337,18 @@
   <td class="name"><strong>total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    80%
+    76.2%
   </span>
   <span class="absValue">
-    (16/ 20)
+    (16/ 21)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    86.5%
+    76.3%
   </span>
   <span class="absValue">
-    (45/ 52)
+    (45/ 59)
   </span>
 </td>
 </tr>
@@ -372,109 +372,123 @@
 <i>12</i>&nbsp;
 <i>13</i>&nbsp;    static allowedMethods = [save: &quot;POST&quot;, update: &quot;PUT&quot;, delete: &quot;DELETE&quot;]
 <i>14</i>&nbsp;
-<i>15</i>&nbsp;    def index(Integer max) {
-<b class="fc"><i>16</i>&nbsp;        params.max = Math.min(max ?: 10, 100)</b>
-<b class="fc"><i>17</i>&nbsp;        respond Food.list(params), model:[foodCount: Food.count()]</b>
-<i>18</i>&nbsp;    }
-<i>19</i>&nbsp;
-<i>20</i>&nbsp;    def show(Food food) {
-<b class="fc"><i>21</i>&nbsp;        respond food</b>
-<i>22</i>&nbsp;    }
-<i>23</i>&nbsp;
-<i>24</i>&nbsp;    def create() {
-<b class="fc"><i>25</i>&nbsp;        respond new Food(params)</b>
-<i>26</i>&nbsp;    }
-<i>27</i>&nbsp;
-<i>28</i>&nbsp;    @Transactional
-<i>29</i>&nbsp;    def save(Food food) {
-<b class="fc"><i>30</i>&nbsp;        if (food == null) {</b>
-<b class="nc"><i>31</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
-<b class="nc"><i>32</i>&nbsp;            notFound()</b>
-<b class="nc"><i>33</i>&nbsp;            return</b>
-<i>34</i>&nbsp;        }
-<i>35</i>&nbsp;
-<b class="fc"><i>36</i>&nbsp;        if (food.hasErrors()) {</b>
-<b class="fc"><i>37</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
-<b class="fc"><i>38</i>&nbsp;            respond food.errors, view:&#39;create&#39;</b>
-<b class="fc"><i>39</i>&nbsp;            return</b>
-<i>40</i>&nbsp;        }
+<i>15</i>&nbsp;    def getFoods() {
+<i>16</i>&nbsp;
+<b class="nc"><i>17</i>&nbsp;        def resultsList = []</b>
+<b class="nc"><i>18</i>&nbsp;        if(params?.category) {</b>
+<b class="nc"><i>19</i>&nbsp;            switch(params?.category) {</b>
+<b class="nc"><i>20</i>&nbsp;                case &quot;starch&quot;:</b>
+<b class="nc"><i>21</i>&nbsp;                    resultsList = Food.findAllByCategory(&quot;starch&quot;)</b>
+<b class="nc"><i>22</i>&nbsp;                    break</b>
+<i>23</i>&nbsp;            }
+<i>24</i>&nbsp;        }
+<i>25</i>&nbsp;
+<b class="nc"><i>26</i>&nbsp;        render template: &#39;foodresults&#39;, model:[foodResults: resultsList]</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    def index(Integer max) {
+<b class="fc"><i>30</i>&nbsp;        params.max = Math.min(max ?: 10, 100)</b>
+<b class="fc"><i>31</i>&nbsp;        respond Food.list(params), model:[foodCount: Food.count()]</b>
+<i>32</i>&nbsp;    }
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    def show(Food food) {
+<b class="fc"><i>35</i>&nbsp;        respond food</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    def create() {
+<b class="fc"><i>39</i>&nbsp;        respond new Food(params)</b>
+<i>40</i>&nbsp;    }
 <i>41</i>&nbsp;
-<b class="fc"><i>42</i>&nbsp;        food.save flush:true</b>
-<i>43</i>&nbsp;
-<b class="fc"><i>44</i>&nbsp;        request.withFormat {</b>
-<b class="fc"><i>45</i>&nbsp;            form multipartForm {</b>
-<b class="fc"><i>46</i>&nbsp;                flash.message = message(code: &#39;default.created.message&#39;, args: [message(code: &#39;food.label&#39;, default: &#39;Food&#39;), food.id])</b>
-<b class="fc"><i>47</i>&nbsp;                redirect food</b>
-<i>48</i>&nbsp;            }
-<b class="pc"><i>49</i>&nbsp;            &#39;*&#39; { respond food, [status: CREATED] }</b>
-<i>50</i>&nbsp;        }
-<i>51</i>&nbsp;    }
-<i>52</i>&nbsp;
-<i>53</i>&nbsp;    def edit(Food food) {
-<b class="fc"><i>54</i>&nbsp;        respond food</b>
-<i>55</i>&nbsp;    }
-<i>56</i>&nbsp;
-<i>57</i>&nbsp;    @Transactional
-<i>58</i>&nbsp;    def update(Food food) {
-<b class="fc"><i>59</i>&nbsp;        if (food == null) {</b>
-<b class="fc"><i>60</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
-<b class="fc"><i>61</i>&nbsp;            notFound()</b>
-<b class="fc"><i>62</i>&nbsp;            return</b>
-<i>63</i>&nbsp;        }
-<i>64</i>&nbsp;
-<b class="fc"><i>65</i>&nbsp;        if (food.hasErrors()) {</b>
-<b class="fc"><i>66</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
-<b class="fc"><i>67</i>&nbsp;            respond food.errors, view:&#39;edit&#39;</b>
-<b class="fc"><i>68</i>&nbsp;            return</b>
-<i>69</i>&nbsp;        }
+<i>42</i>&nbsp;    @Transactional
+<i>43</i>&nbsp;    def save(Food food) {
+<b class="fc"><i>44</i>&nbsp;        if (food == null) {</b>
+<b class="nc"><i>45</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
+<b class="nc"><i>46</i>&nbsp;            notFound()</b>
+<b class="nc"><i>47</i>&nbsp;            return</b>
+<i>48</i>&nbsp;        }
+<i>49</i>&nbsp;
+<b class="fc"><i>50</i>&nbsp;        if (food.hasErrors()) {</b>
+<b class="fc"><i>51</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
+<b class="fc"><i>52</i>&nbsp;            respond food.errors, view:&#39;create&#39;</b>
+<b class="fc"><i>53</i>&nbsp;            return</b>
+<i>54</i>&nbsp;        }
+<i>55</i>&nbsp;
+<b class="fc"><i>56</i>&nbsp;        food.save flush:true</b>
+<i>57</i>&nbsp;
+<b class="fc"><i>58</i>&nbsp;        request.withFormat {</b>
+<b class="fc"><i>59</i>&nbsp;            form multipartForm {</b>
+<b class="fc"><i>60</i>&nbsp;                flash.message = message(code: &#39;default.created.message&#39;, args: [message(code: &#39;food.label&#39;, default: &#39;Food&#39;), food.id])</b>
+<b class="fc"><i>61</i>&nbsp;                redirect food</b>
+<i>62</i>&nbsp;            }
+<b class="pc"><i>63</i>&nbsp;            &#39;*&#39; { respond food, [status: CREATED] }</b>
+<i>64</i>&nbsp;        }
+<i>65</i>&nbsp;    }
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    def edit(Food food) {
+<b class="fc"><i>68</i>&nbsp;        respond food</b>
+<i>69</i>&nbsp;    }
 <i>70</i>&nbsp;
-<b class="fc"><i>71</i>&nbsp;        food.save flush:true</b>
-<i>72</i>&nbsp;
-<b class="fc"><i>73</i>&nbsp;        request.withFormat {</b>
-<b class="fc"><i>74</i>&nbsp;            form multipartForm {</b>
-<b class="fc"><i>75</i>&nbsp;                flash.message = message(code: &#39;default.updated.message&#39;, args: [message(code: &#39;food.label&#39;, default: &#39;Food&#39;), food.id])</b>
-<b class="fc"><i>76</i>&nbsp;                redirect food</b>
-<i>77</i>&nbsp;            }
-<b class="pc"><i>78</i>&nbsp;            &#39;*&#39;{ respond food, [status: OK] }</b>
-<i>79</i>&nbsp;        }
-<i>80</i>&nbsp;    }
-<i>81</i>&nbsp;
-<i>82</i>&nbsp;    @Transactional
-<i>83</i>&nbsp;    def delete(Food food) {
+<i>71</i>&nbsp;    @Transactional
+<i>72</i>&nbsp;    def update(Food food) {
+<b class="fc"><i>73</i>&nbsp;        if (food == null) {</b>
+<b class="fc"><i>74</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
+<b class="fc"><i>75</i>&nbsp;            notFound()</b>
+<b class="fc"><i>76</i>&nbsp;            return</b>
+<i>77</i>&nbsp;        }
+<i>78</i>&nbsp;
+<b class="fc"><i>79</i>&nbsp;        if (food.hasErrors()) {</b>
+<b class="fc"><i>80</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
+<b class="fc"><i>81</i>&nbsp;            respond food.errors, view:&#39;edit&#39;</b>
+<b class="fc"><i>82</i>&nbsp;            return</b>
+<i>83</i>&nbsp;        }
 <i>84</i>&nbsp;
-<b class="fc"><i>85</i>&nbsp;        if (food == null) {</b>
-<b class="fc"><i>86</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
-<b class="fc"><i>87</i>&nbsp;            notFound()</b>
-<b class="fc"><i>88</i>&nbsp;            return</b>
-<i>89</i>&nbsp;        }
-<i>90</i>&nbsp;
-<b class="fc"><i>91</i>&nbsp;        food.delete flush:true</b>
-<i>92</i>&nbsp;
-<b class="fc"><i>93</i>&nbsp;        request.withFormat {</b>
-<b class="fc"><i>94</i>&nbsp;            form multipartForm {</b>
-<b class="fc"><i>95</i>&nbsp;                flash.message = message(code: &#39;default.deleted.message&#39;, args: [message(code: &#39;food.label&#39;, default: &#39;Food&#39;), food.id])</b>
-<b class="fc"><i>96</i>&nbsp;                redirect action:&quot;index&quot;, method:&quot;GET&quot;</b>
-<i>97</i>&nbsp;            }
-<b class="pc"><i>98</i>&nbsp;            &#39;*&#39;{ render status: NO_CONTENT }</b>
-<i>99</i>&nbsp;        }
-<i>100</i>&nbsp;    }
-<i>101</i>&nbsp;
-<i>102</i>&nbsp;    protected void notFound() {
-<b class="fc"><i>103</i>&nbsp;        request.withFormat {</b>
-<b class="fc"><i>104</i>&nbsp;            form multipartForm {</b>
-<b class="fc"><i>105</i>&nbsp;                flash.message = message(code: &#39;default.not.found.message&#39;, args: [message(code: &#39;food.label&#39;, default: &#39;Food&#39;), params.id])</b>
-<b class="fc"><i>106</i>&nbsp;                redirect action: &quot;index&quot;, method: &quot;GET&quot;</b>
-<i>107</i>&nbsp;            }
-<b class="pc"><i>108</i>&nbsp;            &#39;*&#39;{ render status: NOT_FOUND }</b>
-<i>109</i>&nbsp;        }
-<i>110</i>&nbsp;    }
-<i>111</i>&nbsp;}
+<b class="fc"><i>85</i>&nbsp;        food.save flush:true</b>
+<i>86</i>&nbsp;
+<b class="fc"><i>87</i>&nbsp;        request.withFormat {</b>
+<b class="fc"><i>88</i>&nbsp;            form multipartForm {</b>
+<b class="fc"><i>89</i>&nbsp;                flash.message = message(code: &#39;default.updated.message&#39;, args: [message(code: &#39;food.label&#39;, default: &#39;Food&#39;), food.id])</b>
+<b class="fc"><i>90</i>&nbsp;                redirect food</b>
+<i>91</i>&nbsp;            }
+<b class="pc"><i>92</i>&nbsp;            &#39;*&#39;{ respond food, [status: OK] }</b>
+<i>93</i>&nbsp;        }
+<i>94</i>&nbsp;    }
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    @Transactional
+<i>97</i>&nbsp;    def delete(Food food) {
+<i>98</i>&nbsp;
+<b class="fc"><i>99</i>&nbsp;        if (food == null) {</b>
+<b class="fc"><i>100</i>&nbsp;            transactionStatus.setRollbackOnly()</b>
+<b class="fc"><i>101</i>&nbsp;            notFound()</b>
+<b class="fc"><i>102</i>&nbsp;            return</b>
+<i>103</i>&nbsp;        }
+<i>104</i>&nbsp;
+<b class="fc"><i>105</i>&nbsp;        food.delete flush:true</b>
+<i>106</i>&nbsp;
+<b class="fc"><i>107</i>&nbsp;        request.withFormat {</b>
+<b class="fc"><i>108</i>&nbsp;            form multipartForm {</b>
+<b class="fc"><i>109</i>&nbsp;                flash.message = message(code: &#39;default.deleted.message&#39;, args: [message(code: &#39;food.label&#39;, default: &#39;Food&#39;), food.id])</b>
+<b class="fc"><i>110</i>&nbsp;                redirect action:&quot;index&quot;, method:&quot;GET&quot;</b>
+<i>111</i>&nbsp;            }
+<b class="pc"><i>112</i>&nbsp;            &#39;*&#39;{ render status: NO_CONTENT }</b>
+<i>113</i>&nbsp;        }
+<i>114</i>&nbsp;    }
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;    protected void notFound() {
+<b class="fc"><i>117</i>&nbsp;        request.withFormat {</b>
+<b class="fc"><i>118</i>&nbsp;            form multipartForm {</b>
+<b class="fc"><i>119</i>&nbsp;                flash.message = message(code: &#39;default.not.found.message&#39;, args: [message(code: &#39;food.label&#39;, default: &#39;Food&#39;), params.id])</b>
+<b class="fc"><i>120</i>&nbsp;                redirect action: &quot;index&quot;, method: &quot;GET&quot;</b>
+<i>121</i>&nbsp;            }
+<b class="pc"><i>122</i>&nbsp;            &#39;*&#39;{ render status: NOT_FOUND }</b>
+<i>123</i>&nbsp;        }
+<i>124</i>&nbsp;    }
+<i>125</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2017-05-05 13:19</div>
+    <div style="float:right;">generated on 2017-05-07 18:35</div>
 </div>
 </body>
 </html>

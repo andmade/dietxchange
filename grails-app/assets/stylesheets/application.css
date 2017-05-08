@@ -33,9 +33,11 @@ h1,h2,h3,h4,h5,h6 {
 /*h3 {*/
     /*font-size: 1.5em;*/
 /*}*/
-
-#diary-date {
-    /*font-weight: bold;*/
+body {
+    background-color: #f5f5f5 !important;
+}
+#diary-date .material-icons {
+    font-size: inherit;
 
 }
 
@@ -45,9 +47,7 @@ h1,h2,h3,h4,h5,h6 {
     max-width: 100%;
 }
 
-body {
-    background-color: #f5f5f5 !important;
-}
+
 
 #site-nav {
     background-color: #E64A19;
@@ -84,7 +84,7 @@ body {
     min-height: 50px !important;
 }
 #site-nav li.active a, #site-nav li.active a:hover, #site-nav li.active a:focus {
-    background-color: #F8F8F8;
+    background-color: #f5f5f5;
     color:#333333 !important;
     border: #f8f8f8;
     z-index: 1000;
@@ -117,7 +117,9 @@ body {
     font-weight: bold;
 }
 
-
+#diaryRemainingValuesContainer {
+    margin-top:2em;
+}
 #diaryRemainingValuesContainer .row {
     padding: 1vw;
 
@@ -176,13 +178,22 @@ i {
     margin:5px;
 }
 
+.list-food-item {
+    font-weight:bold;
+}
+
+.list-group-item .material-icons{
+    margin-right: 1rem !important;
+}
+
 #foodDetails {
     margin:5px;
     font-weight: bold;
 }
 
 .ok-button {
-    background-color:#304FFE !important;
+    background-color:#F44336 !important;
+    border-color:#F44336 !important;
     color: #fff !important;
     font-weight: bold !important;
 }
@@ -195,6 +206,10 @@ i {
 .starch-color {
     background-color: #673AB7 !important;
     color:#fff !important;
+}
+
+.starch-color-circle {
+   color: #673AB7 !important;
 }
 
 .fruit-color {

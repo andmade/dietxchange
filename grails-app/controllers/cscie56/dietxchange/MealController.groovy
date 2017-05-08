@@ -14,28 +14,71 @@ class MealController {
 
     def addFoodToMeal() {
         def mealtype = params?.mealtype
-            DayLog daylog
-            if(params?.daylogID) {
-                daylog = DayLog.get(params?.daylogID)
-            }
-            println(daylog)
-            def dieter = Dieter.get(params?.dieterID)
-            def date = Date.parse('yyyy-MM-dd', params.date)
-            def food = Food.get(params?.foodID)
-            if(!daylog) {
-                daylog = new DayLog(dieter: dieter, date: date)
-            }
 
-            if(daylog.breakfast) {
-                    println(food)
+        DayLog daylog
+        if(params?.daylogID) {
+            daylog = DayLog.get(params?.daylogID)
+        }
+        def dieter = Dieter.get(params?.dieterID)
+        def date = Date.parse('yyyy-MM-dd', params.date)
+        def food = Food.get(params?.foodID)
+        if(!daylog) {
+            daylog = new DayLog(dieter: dieter, date: date)
+        }
+        switch(params?.mealtype) {
+            case "breakfast":
+                if (daylog.breakfast) {
                     daylog.breakfast.addToFoods(food)
+                    daylog.breakfast.save(flush:true)
+                    daylog.addToCounts(food)
 
-            } else{
-                daylog.breakfast = new Meal(type:'breakfast',dieter:dieter, dayLog: daylog)
-            }
-            daylog.breakfast.save(flush:true)
-            daylog.save(flush:true)
-            redirect(controller: "dayLog", action: "diary", params:[date: params.date])
+                } else {
+                    daylog.breakfast = new Meal (type: 'breakfast', dieter: dieter, dayLog: daylog)
+                    daylog.breakfast.addToFoods(food)
+                    daylog.breakfast.save(flush:true)
+                    daylog.addToCounts(food)
+                }
+                break
+            case "lunch":
+                if (daylog.lunch) {
+                    daylog.lunch.addToFoods(food)
+                    daylog.lunch.save(flush:true)
+                    daylog.addToCounts(food)
+                } else {
+                    daylog.lunch = new Meal (type: 'lunch', dieter: dieter, dayLog: daylog)
+                    daylog.lunch.addToFoods(food)
+                    daylog.lunch.save(flush:true)
+                    daylog.addToCounts(food)
+                }
+                break
+            case "dinner":
+                if (daylog.dinner) {
+                    daylog.dinner.addToFoods(food)
+                    daylog.dinner.save(flush:true)
+                    daylog.addToCounts(food)
+
+                } else {
+                    daylog.dinner = new Meal (type: 'dinner', dieter: dieter, dayLog: daylog)
+                    daylog.dinner.addToFoods(food)
+                    daylog.dinner.save(flush:true)
+                    daylog.addToCounts(food)
+                }
+                break
+            default:
+                if (daylog.snack) {
+                    daylog.snack.addToFoods(food)
+                    daylog.snack.save(flush:true)
+                    daylog.addToCounts(food)
+                } else {
+                    daylog.snack = new Meal (type: 'snack', dieter: dieter, dayLog: daylog)
+                    daylog.snack.addToFoods(food)
+                    daylog.snack.save(flush:true)
+                    daylog.addToCounts(food)
+                }
+                break
+        }
+        daylog.save(flush:true)
+        redirect(controller: "dayLog", action: "diary", params:[date: params.date])
 
     }
     def index(Integer max) {
