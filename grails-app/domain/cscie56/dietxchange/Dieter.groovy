@@ -16,7 +16,7 @@ class Dieter {
     Integer proteinCount
     Integer fatCount
     Integer targetCalories
-    Map<Food,String> favoriteFoods = [:]
+    List<Food> favoriteFoods = []
 
 
     static constraints = {

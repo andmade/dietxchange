@@ -2,11 +2,26 @@
 
 ## Description
 
-My final project will be a web application that helps people following a Mediterranean Diet. This particular diet emphasizes lean proteins, healthy fats, and whole grains with a nutrient macro breakdown goal of 40% carbohydrates, 25% protein, and 35% grams.
+My final project is a prototype application
+to help people following the "Exchange Diet" system.
+This particular system was developed
+by the American Diabetes Association to help those
+patients manage their diet and keep their carb intake low.
+However, the system itself can be used by anyone. It works by breaking down foods into 6 categories and
+assigning values (or "exchanges") to each category that
+represent how much out of each category a person can eat.
 
-Upon registering, users can enter their desired calorie intake. Following this, it'll break those calories up to meet the previously mentioned goals (for example, on a 1400 calorie plan, 560 calories would come from carbohydrates, equating to about 140 grams of carbohydrates).
 
-From the breakdown of calories you're allowed, the application will present to you how many "servings" of each of the following categories you can have:
+Upon registering, users would be able to enter their desired calorie 
+intake. Following this, these calories would be broken up 
+up to meet their nutritional goals
+
+For example, a person following a Mediterranean Diet 
+(which emphasizes lean proteins, healthy fats, and whole grains) would want a nutrient breakdown goal of 40% carbohydrates,
+25% protein, and 35% fat. For someone on 1400 calorie/day plan, 
+560 calories would come from carbohydrates, equating to about 140 grams of carbohydrates
+
+With this info, the application would present to you how many "servings" of each of the following categories you can have:
 
 + Starches
 + Fruits
@@ -14,8 +29,6 @@ From the breakdown of calories you're allowed, the application will present to y
 + Vegetables
 + Protein
 + Fats
-
-(For reference, each of these categories comes from the Diabetic Exchange List, a substitution-based meal plan frequently used to help those managing diabetes).
 
 On a 1400 calorie plan, this would equal to:
 
@@ -27,12 +40,14 @@ From there, for every meal (for this app, we will only consider the following me
 
 Time permitting, the app will also include a feature for varying caloric goals (for ex, one week at 1400 calories and the next at 1800 calories, with the allowed servings in each category adjusted accordingly) and include a reporting feature of how the user has done over specific periods (by week, by month, by year, and the beginning of time). It'll also include the ability to create custom marconutrient percentages or calculate a recommended intake based on a user's personal information (weight, height, activity level, gender).
 
-## Outline
+## Outside Sources:
+
+Material Design Bootstrap: http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html
 
 ### Domains:
 
-**1. User**
-- has food recommendations for each category (starch, fruit, milk, vegetable, protein, fat)
+**1. Dieter**
+- has recommended exchanges for each category
 - has target calorie goal
 - has favorites of foods (can be null)
 - has many DayLogs
@@ -46,25 +61,12 @@ Time permitting, the app will also include a feature for varying caloric goals (
 
 **3. Meal**
 - has type (breakfast, lunch, dinner, snack)
-- has daylog
+- has dayLog
 - has user
 - hasMany Foods
 
 **4. Food**
 - has category type: starch, fruit, milk, vegetable, protein, fat
-- belongs to Breakfast/Lunch/Dinner/Snack
-- has favorite flag
+- hasMany relationship with Meal
 - has portion size
 - has portion unit
-
->Will probably reformat this so that there's a Food for each item in the database,
-and Food would have many Meals associated with it (since the database of foods.
-will be limited). So a hasMany<=>hasMany relationship. More research on how to implement
-in Grails required. If this happens, favorite management will be moved to the User class.
-
-### Food database (will be used to create the Food classes)
-Each item has 
-- item name
-- has food type(s)
-- has portion size
-- possibly JSON formatted? Ideas welcome

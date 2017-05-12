@@ -56,6 +56,10 @@ class BootStrap {
         day1.addToCounts(Food.get(1))
         day1.save()
 
+        def dieter = Dieter.get(1)
+        dieter.favoriteFoods.add(Food.get(1))
+        dieter.favoriteFoods.add(Food.get(5))
+
     }
 
     def createSeederFoods() {
